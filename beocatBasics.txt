@@ -8,4 +8,4 @@ sbatch
 --ntasks-per-node=16	(16 cores on each node/machine)
 
 Example:
-sbatch --time=1 --mem=1g ./a.out
+sbatch --time=1 --mem=1g ./run.sh

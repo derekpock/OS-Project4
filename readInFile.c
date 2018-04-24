@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 int main() {
-    char* filePath = "~dan/625/wiki_dump.txt";
+    char* filePath = "/homes/dan/625/wiki_dump.txt";
 //    char* filePath = "../readInFile.c";
     FILE *fp;
     fp = fopen(filePath, "r");
