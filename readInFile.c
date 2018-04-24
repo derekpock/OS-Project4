@@ -1,5 +1,5 @@
-#include <malloc.h>
 #define _GNU_SOURCE
+#include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
 
