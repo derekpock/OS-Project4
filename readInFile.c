@@ -22,7 +22,6 @@ int main() {
     while ((read = getline(&line, &lineLength, fp)) != -1) {
         fileData[lineNumber++] = line;
         fileData = realloc(fileData, sizeof(char*) * (lineNumber + 1));
-        printf("%s\n", fileData[lineNumber-1]);
         line = NULL;
     }
     printf("\nresult\n");
