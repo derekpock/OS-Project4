@@ -24,9 +24,7 @@ int main() {
         fileData = realloc(fileData, sizeof(char*) * (lineNumber + 1));
         line = NULL;
     }
-    printf("\nresult\n");
-    printf("%s\n", fileData[0]);
-    printf("%s\n", fileData[lineNumber - 1]);
+
     fclose(fp);
     for(int i = 0; i <  lineNumber; i++) {
         free(fileData[i]);

@@ -9,6 +9,7 @@ include_directories(3way-mpi
 
 add_executable(OS_Project4
 #        longestCommonSubstringSingle.c
-        readInFile.c
+#        readInFile.c
+        singleThread.c
         )
 
