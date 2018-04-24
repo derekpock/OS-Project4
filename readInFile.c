@@ -1,5 +1,7 @@
-#include <stdio.h>
 #include <malloc.h>
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
 
 int main() {
     char* filePath = "~dan/625/wiki_dump.txt";
