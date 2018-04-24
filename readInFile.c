@@ -14,7 +14,7 @@ int main() {
     char* line = NULL;
     char** fileData = malloc(sizeof(char*));
     size_t lineLength = 0;
-    ssize_t read;
+    long read;
     int lineNumber = 0;
 
     while ((read = getline(&line, &lineLength, fp)) != -1) {
