@@ -1,0 +1,11 @@
+sbatch 
+--time=24:60:60		(min, min:sec, hr:min:sec)
+--mem-per-cpu=512M	(per cpu)
+--mem=1g		(total)
+--cpus-per-task=1 	(cores per task)
+--ntasks=1		(number of tasks)
+--nodes=1		(1 machine)
+--ntasks-per-node=16	(16 cores on each node/machine)
+
+Example:
+sbatch --time=1 --mem=1 ./a.out
