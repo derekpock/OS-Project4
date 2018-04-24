@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <malloc.h>
+
+int main() {
+    char* filePath = "~dan/625/wiki_dump.txt";
+//    char* filePath = "../readInFile.c";
+    FILE *fp;
+    fp = fopen(filePath, "r");
+    if(fp == NULL) {
+        printf("Error! Unable to read file!");
+        return -1;
+    }
+
+    char* line = NULL;
+    char** fileData = malloc(sizeof(char*));
+    size_t lineLength = 0;
+    ssize_t read;
+    int lineNumber = 0;
+
+    while ((read = getline(&line, &lineLength, fp)) != -1) {
+        fileData[lineNumber++] = line;
+        fileData = realloc(fileData, sizeof(char*) * (lineNumber + 1));
+        printf("%s\n", fileData[lineNumber-1]);
+        line = NULL;
+    }
+    printf("\nresult\n");
+    printf("%s\n", fileData[0]);
+    printf("%s\n", fileData[lineNumber - 1]);
+    fclose(fp);
+    for(int i = 0; i <  lineNumber; i++) {
+        free(fileData[i]);
+    }
+}

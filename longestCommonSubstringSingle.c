@@ -49,9 +49,6 @@ void findLongestSubstring(char* a, char* b) {
                 recentList = recentList->nextItem;
                 recentList->i = i;
                 recentList->j = j;
-//                recentList->valueIndex = index;
-//                recentList->valueAddr = set + index;
-
                 // Set the value of the array.
                 set[index] = 1;
             }
@@ -85,7 +82,6 @@ void findLongestSubstring(char* a, char* b) {
         size_t j = currentList->j;
         size_t it = i;
         size_t jt = j;
-        //Cannot optimize set to zero (below) with multiple threads. Linked list is not in order.
         while(set[((it + 1) * bLength) + jt + 1] == 1) {
             set[((it + 1) * bLength) + jt + 1] = 0;
             it++;
