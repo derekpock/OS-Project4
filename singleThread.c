@@ -110,7 +110,8 @@ int main(int argc, char *argv[]) {
     // End thread section. Print the results.
     for(unsigned long i = 0; i < lineNumber; i++) {
 //        printf("%lu-%lu: '%s'\n", i, (i + 1), results[i]);
-        printf("%lu-%lu: %s\n", i, (i + 1), results[i]);
+        printf("next address: %p\n", results + (i * sizeof(char*)));
+        printf("%lu-%lu: %s\n\n", i, (i + 1), results[i]);
     }
 
     // Free all memory.
@@ -269,7 +270,7 @@ char* findLongestSubstring(char* a, char* b) {
     free(set);
 
     // Create the longest string found.
-    char *longestString = malloc(sizeof(char) * (longestValue + 1));
+    char *longestString = malloc(sizeof(char) * (longestValue));
     if (longestString == NULL) {
         printf("Error! Unable to allocate memory for longestString: size %lu\n", sizeof(longestValue + 1));
         exit(-1);
@@ -277,6 +278,6 @@ char* findLongestSubstring(char* a, char* b) {
     for (unsigned long i = 0; i < longestValue; i++) {
         longestString[i] = a[i + longestIndex];
     }
-    longestString[longestValue] = '\0';
+    //longestString[longestValue] = '\0';
     return longestString;
 }
