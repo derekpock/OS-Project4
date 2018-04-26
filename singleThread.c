@@ -22,8 +22,8 @@ int main() {
 //    return 0;
 
     // Prepare and open the file.
-//    filePath = "/homes/dan/625/wiki_dump.txt";
-    char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
+    char* filePath = "/homes/dan/625/wiki_dump.txt";
+//    char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
     FILE *fp = fopen(filePath, "r");
     if(fp == NULL) {
         printf("Error! Unable to open file!");
