@@ -153,7 +153,7 @@ void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLine
 //        localResults[i] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine +1]);
 //        results[i + firstLine] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
         char* line = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
-        printf("%s\n", line);
+        printf("%lu: %s\n", (i + firstLine), line);
         results[firstLine + i] = line;
     }
 
