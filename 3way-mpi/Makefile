@@ -17,8 +17,8 @@ CC        = mpicc
 # Modify TOPDIR if you use your own include files and library files
 #
 
-PROGRAM   = hello			# name of the binary
-SRCS      = MPI_C_SAMPLE.c		# source file
+PROGRAM   = openmp			# name of the binary
+SRCS      = openmp.c		# source file
 OBJS      = $(SRCS:.c=.o)		# object file
 
 #
@@ -30,7 +30,7 @@ default: all
 all: $(PROGRAM) 
 
 $(PROGRAM): $(OBJS)
-	$(CC) -m32 $(OBJS) -o $(PROGRAM) $(LDFLAGS)
+	$(CC) $(OBJS) -o $(PROGRAM) $(LDFLAGS)
 
 clean:
 	/bin/rm -f $(OBJS) $(PROGRAM)
