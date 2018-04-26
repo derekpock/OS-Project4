@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <memory.h>
 #include <time.h>
+#include <omp.h>
 
 char* findLongestSubstring(char* a, char* b);
 void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results);
@@ -105,7 +106,12 @@ int main(int argc, char *argv[]) {
     }
 
     // Compare all of the substrings. Begin thread section.
-    threadRun(0, numberOfThreads, lineNumber, fileData, results);
+    omp_set_num_threads(numberOfThreads);
+
+    #pragma omp parallel
+    {
+        threadRun(omp_get_thread_num(), numberOfThreads, lineNumber, fileData, results);
+    }
 
     // End thread section. Print the results.
     for(unsigned long i = 0; i < (lineNumber - 1); i++) {
