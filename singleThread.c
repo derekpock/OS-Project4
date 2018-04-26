@@ -18,7 +18,7 @@ struct ListItem {
 int main(int argc, char *argv[]) {
     unsigned long numberOfLinesToProcess = 1000;
     int numberOfThreads = 1;
-    char verbosity = 0;
+    char verbosity = 1;
 
     for(int i = 1; i < argc; i++) {
         if(strncmp(argv[i], "--lines=", 8) == 0) {
@@ -26,10 +26,10 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(argv[i], "-l") == 0 && i != (argc - 1)) {
             numberOfLinesToProcess = strtoul(argv[i + 1], NULL, 10);
             i++;
-//        } else if (strcmp(argv[i], "-q") == 0) {
-//            verbosity = 0;
+        } else if (strcmp(argv[i], "-q") == 0) {
+            verbosity = 0;
         } else if (strcmp(argv[i], "-v") == 0) {
-            verbosity = 1;
+            verbosity = 2;
         } else if (strncmp(argv[i], "--threads=", 10) == 0) {
             numberOfThreads = (int)strtol(argv[i] + 10, NULL, 10);
             if(numberOfThreads < 1) {
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
                    "--lines=# (-l #)     Set the number of lines to process from the input file.\n"
                    "--threads=# (-t #)   Set the number of threads to utilize for processing.\n"
                    "-v                   Enable verbose output.\n"
-//                   "-q                   Silence all output.\n"
+                   "-q                   Silence all output.\n"
                    "--help (-h)          Display this help.\n");
             return 0;
         } else {
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 //    char* filePath = "/homes/dan/625/wiki_dump.txt";
     char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
 
-    if(verbosity) {
+    if(verbosity == 2) {
         printf("Running with %d threads on %lu lines.\n", numberOfThreads, numberOfLinesToProcess);
         printf("File path: %s\n", filePath);
     }
@@ -107,10 +107,12 @@ int main(int argc, char *argv[]) {
     // Compare all of the substrings. Begin thread section.
     threadRun(0, numberOfThreads, lineNumber, fileData, results);
 
-    // End thread section. Print the results.
-    for(unsigned long i = 0; i < (lineNumber - 1); i++) {
+    if(verbosity != 0) {
+        // End thread section. Print the results.
+        for(unsigned long i = 0; i < (lineNumber - 1); i++) {
 //        printf("%lu-%lu: '%s'\n", i, (i + 1), results[i]);
-        printf("%lu-%lu: %s\n", i, (i + 1), results[i]);
+            printf("%lu-%lu: %s\n", i, (i + 1), results[i]);
+        }
     }
 
     // Free all memory.
