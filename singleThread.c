@@ -266,6 +266,10 @@ char* findLongestSubstring(char* a, char* b) {
 
     // Create the longest string found.
     char *longestString = malloc(sizeof(char) * (longestValue + 1));
+    if (longestString == NULL) {
+        printf("Error! Unable to allocate memory for longestString: size %lu\n", sizeof(longestValue + 1));
+        exit(-1);
+    }
     for (unsigned long i = 0; i < longestValue; i++) {
         longestString[i] = a[i + longestIndex];
     }
