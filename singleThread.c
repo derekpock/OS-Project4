@@ -36,6 +36,7 @@ int main() {
 
     // Read in the file line by line. Put data in fileData.
     lineNumber = 0;
+    fileData = NULL;
     while ((read = getline(&line, &lineLength, fp)) != -1) {
         fileData = realloc(fileData, sizeof(char*) * (lineNumber + 1));
         if(fileData == NULL) {
