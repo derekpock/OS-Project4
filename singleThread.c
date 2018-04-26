@@ -15,15 +15,61 @@ struct ListItem {
     unsigned long j;
 };
 
-int main() {
+int main(int argc, char *argv[]) {
+    unsigned long numberOfLinesToProcess = 100;
+    int numberOfThreads = 1;
+    char verbosity = 0;
+
+    for(int i = 1; i < argc; i++) {
+        if(strncmp(argv[i], "--lines=", 8) == 0) {
+            numberOfLinesToProcess = strtoul(argv[i] + 8, NULL, 10);
+        } else if (strcmp(argv[i], "-l") == 0 && i != (argc - 1)) {
+            numberOfLinesToProcess = strtoul(argv[i + 1], NULL, 10);
+            i++;
+//        } else if (strcmp(argv[i], "-q") == 0) {
+//            verbosity = 0;
+        } else if (strcmp(argv[i], "-v") == 0) {
+            verbosity = 1;
+        } else if (strncmp(argv[i], "--threads=", 10) == 0) {
+            numberOfThreads = (int)strtol(argv[i] + 10, NULL, 10);
+            if(numberOfThreads < 1) {
+                printf("Invalid Argument: number of threads must be at least 1.\n");
+                return -1;
+            }
+        } else if (strcmp(argv[i], "-t") == 0 && i != (argc - 1)) {
+            numberOfThreads = (int)strtol(argv[i + 1], NULL, 10);
+            if(numberOfThreads < 1) {
+                printf("Invalid Argument: number of threads must be at least 1.\n");
+                return -1;
+            }
+            i++;
+        } else if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
+            printf("Arguments:\n"
+                   "--lines=# (-l #)     Set the number of lines to process from the input file.\n"
+                   "--threads=# (-t #)   Set the number of threads to utilize for processing.\n"
+                   "-v                   Enable verbose output.\n"
+//                   "-q                   Silence all output.\n"
+                   "--help (-h)          Display this help.\n");
+            return 0;
+        } else {
+            printf("Invalid Argument: unknown option: %s\n", argv[i]);
+            return -1;
+        }
+    }
+
 //    char* a = "asdfghj\r\n";
 //    char* b = "asdfghj";
 //    printf("%s\n", findLongestSubstring(a, b));
 //    return 0;
-
     // Prepare and open the file.
     char* filePath = "/homes/dan/625/wiki_dump.txt";
 //    char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
+
+    if(verbosity) {
+        printf("Running with %d threads on %lu lines.\n", numberOfThreads, numberOfLinesToProcess);
+        printf("File path: %s\n", filePath);
+    }
+
     FILE *fp = fopen(filePath, "r");
     if(fp == NULL) {
         printf("Error! Unable to open file!");
@@ -36,7 +82,7 @@ int main() {
     char* line = NULL;
     unsigned long lineLength;
     char** fileData = NULL;
-    while ((read = getline(&line, &lineLength, fp)) != -1) {
+    while (lineNumber < numberOfLinesToProcess && (read = getline(&line, &lineLength, fp)) != -1) {
         fileData = realloc(fileData, sizeof(char*) * (lineNumber + 1));
         if(fileData == NULL) {
             printf("Error! Unable to allocate memory for fileData: size %lu\n", (lineNumber + 1));
@@ -59,7 +105,7 @@ int main() {
     }
 
     // Compare all of the substrings. Begin thread section.
-    threadRun(0, 1, lineNumber, fileData, results);
+    threadRun(0, numberOfThreads, lineNumber, fileData, results);
 
     // End thread section. Print the results.
     for(unsigned long i = 0; i < lineNumber; i++) {
