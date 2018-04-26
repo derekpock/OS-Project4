@@ -144,20 +144,21 @@ void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLine
     }
 
     // Complete quota to local results.
-    char** localResults = malloc(sizeof(char*) * quota);
-    if(localResults == NULL) {
-        printf("Error! Unable to allocate memory for localResults: size %lu\n", quota * sizeof(char*));
-        exit(-1);
-    }
+//    char** localResults = malloc(sizeof(char*) * quota);
+//    if(localResults == NULL) {
+//        printf("Error! Unable to allocate memory for localResults: size %lu\n", quota * sizeof(char*));
+//        exit(-1);
+//    }
     for(int i = 0; i < quota; i++) {
-        localResults[i] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine +1]);
+//        localResults[i] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine +1]);
+        results[i + firstLine] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
     }
 
-    // Copy local results to final results.
-    for(int i = 0; i < quota; i++) {
-        results[i + firstLine] = localResults[i];
-    }
-    free(localResults);
+//    // Copy local results to final results.
+//    for(int i = 0; i < quota; i++) {
+//        results[i + firstLine] = localResults[i];
+//    }
+//    free(localResults);
 }
 
 // Returns the longest common string between a and b. Be sure to free the returned char* when done.
