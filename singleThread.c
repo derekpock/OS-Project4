@@ -16,7 +16,7 @@ struct ListItem {
 };
 
 int main(int argc, char *argv[]) {
-    unsigned long numberOfLinesToProcess = 100;
+    unsigned long numberOfLinesToProcess = 1000;
     int numberOfThreads = 1;
     char verbosity = 0;
 
@@ -108,9 +108,8 @@ int main(int argc, char *argv[]) {
     threadRun(0, numberOfThreads, lineNumber, fileData, results);
 
     // End thread section. Print the results.
-    for(unsigned long i = 0; i < lineNumber; i++) {
+    for(unsigned long i = 0; i < (lineNumber - 1); i++) {
 //        printf("%lu-%lu: '%s'\n", i, (i + 1), results[i]);
-        printf("next address: %p\n", results + (i * sizeof(char*)));
         printf("%lu-%lu: %s\n\n", i, (i + 1), results[i]);
     }
 
@@ -145,24 +144,24 @@ void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLine
     }
 
     // Complete quota to local results.
-//    char** localResults = malloc(sizeof(char*) * quota);
-//    if(localResults == NULL) {
-//        printf("Error! Unable to allocate memory for localResults: size %lu\n", quota * sizeof(char*));
-//        exit(-1);
-//    }
+    char** localResults = malloc(sizeof(char*) * quota);
+    if(localResults == NULL) {
+        printf("Error! Unable to allocate memory for localResults: size %lu\n", quota * sizeof(char*));
+        exit(-1);
+    }
     for(int i = 0; i < quota; i++) {
-//        localResults[i] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine +1]);
+        localResults[i] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
 //        results[i + firstLine] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
-        char* line = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
-        printf("%lu: %s\n", (i + firstLine), line);
-        results[firstLine + i] = line;
+//        char* line = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
+//        printf("%lu: %s\n", (i + firstLine), line);
+//        results[firstLine + i] = line;
     }
 
-//    // Copy local results to final results.
-//    for(int i = 0; i < quota; i++) {
-//        results[i + firstLine] = localResults[i];
-//    }
-//    free(localResults);
+    // Copy local results to final results.
+    for(int i = 0; i < quota; i++) {
+        results[i + firstLine] = localResults[i];
+    }
+    free(localResults);
 }
 
 // Returns the longest common string between a and b. Be sure to free the returned char* when done.
@@ -270,7 +269,7 @@ char* findLongestSubstring(char* a, char* b) {
     free(set);
 
     // Create the longest string found.
-    char *longestString = malloc(sizeof(char) * (longestValue));
+    char *longestString = malloc(sizeof(char) * (longestValue + 1));
     if (longestString == NULL) {
         printf("Error! Unable to allocate memory for longestString: size %lu\n", sizeof(longestValue + 1));
         exit(-1);
@@ -278,6 +277,6 @@ char* findLongestSubstring(char* a, char* b) {
     for (unsigned long i = 0; i < longestValue; i++) {
         longestString[i] = a[i + longestIndex];
     }
-    //longestString[longestValue] = '\0';
+    longestString[longestValue] = '\0';
     return longestString;
 }
