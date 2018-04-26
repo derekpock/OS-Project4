@@ -1,10 +1,10 @@
 #define _GNU_SOURCE
+#include <omp.h>
 #include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
 #include <time.h>
-#include <omp.h>
 
 char* findLongestSubstring(char* a, char* b);
 void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results);
@@ -63,8 +63,8 @@ int main(int argc, char *argv[]) {
 //    printf("%s\n", findLongestSubstring(a, b));
 //    return 0;
     // Prepare and open the file.
-//    char* filePath = "/homes/dan/625/wiki_dump.txt";
-    char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
+    char* filePath = "/homes/dan/625/wiki_dump.txt";
+//    char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
 
     if(verbosity) {
         printf("Running with %d threads on %lu lines.\n", numberOfThreads, numberOfLinesToProcess);
@@ -108,7 +108,7 @@ int main(int argc, char *argv[]) {
     // Compare all of the substrings. Begin thread section.
     omp_set_num_threads(numberOfThreads);
 
-    #pragma omp parallel
+#pragma omp parallel
     {
         threadRun(omp_get_thread_num(), numberOfThreads, lineNumber, fileData, results);
     }
