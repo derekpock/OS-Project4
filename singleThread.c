@@ -62,8 +62,8 @@ int main(int argc, char *argv[]) {
 //    printf("%s\n", findLongestSubstring(a, b));
 //    return 0;
     // Prepare and open the file.
-//    char* filePath = "/homes/dan/625/wiki_dump.txt";
-    char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
+    char* filePath = "/homes/dan/625/wiki_dump.txt";
+//    char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
 
     if(verbosity) {
         printf("Running with %d threads on %lu lines.\n", numberOfThreads, numberOfLinesToProcess);
