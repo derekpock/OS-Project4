@@ -6,12 +6,12 @@ do
     do
         for k in 1 2 4 8 16 32
         do
-            ./schedule $k $j 1
+            ./schedule.sh $k $j 1
         done
-        ./schedule 4 $j 2
-        ./schedule 4 $j 4
-        ./schedule 2 $j 4
-        ./schedule 16 $j 2
-        ./schedule 2 $j 16
+        ./schedule.sh 4 $j 2
+        ./schedule.sh 4 $j 4
+        ./schedule.sh 2 $j 4
+        ./schedule.sh 16 $j 2
+        ./schedule.sh 2 $j 16
     done
 done
