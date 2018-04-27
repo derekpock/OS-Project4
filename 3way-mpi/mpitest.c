@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <malloc.h>
 #include "mpi.h"
 
 int main(int argc, char *argv[])
@@ -7,17 +8,27 @@ int main(int argc, char *argv[])
 
     /* Start up MPI */
 
-    int yValue = 0;
+    int *yValue;
+    int *zValue;
+    yValue = malloc(sizeof(int));
+    *yValue = 1;
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &threadId);
     MPI_Comm_size(MPI_COMM_WORLD, &numOfThreads);
 
-    int xValue = 0;
+    int *xValue;
+    int *aValue;
+    xValue = malloc(sizeof(int));
+    *xValue = 1;
 
     if (threadId == 0) {
-        xValue = 1;
-        yValue = 1;
+        zValue = malloc(sizeof(int));
+        aValue = malloc(sizeof(int));
+        *zValue = 2;
+        *aValue = 2;
+        *xValue = 2;
+        *yValue = 2;
 //        printf("Enter the number of times around the ring: ");
 //        scanf("%d", &num);
 //        --num;
@@ -60,8 +71,8 @@ int main(int argc, char *argv[])
 
     /* Quit */
 
-    printf("Thread %d has values of before %d and after %d.\n", threadId, yValue, xValue);
-    
+    printf("Thread %d has values of before %d and after %d, also %d and %d.\n", threadId, *yValue, *xValue, *zValue, *aValue);
+
     MPI_Finalize();
     return 0;
 }
