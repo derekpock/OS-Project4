@@ -91,11 +91,11 @@ main(int argc, char* argv[])
 	rc = MPI_Init(&argc,&argv);
 	if (rc != MPI_SUCCESS) {
 	  printf ("Error starting MPI program. Terminating.\n");
-          MPI_Abort(MPI_COMM_WORLD, rc);
-        }
+	  MPI_Abort(MPI_COMM_WORLD, rc);
+	}
 
-        MPI_Comm_size(MPI_COMM_WORLD,&numtasks);
-        MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+    MPI_Comm_size(MPI_COMM_WORLD,&numtasks);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
 
 	NUM_THREADS = numtasks;
 	printf("size = %d rank = %d\n", numtasks, rank);
