@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
     /* Quit */
 
-    printf("Thread %d has values of before %d and after %d, also %d and %d.\n", threadId, *yValue, *xValue);
+    printf("Thread %d has values of before %d and after %d.\n", threadId, *yValue, *xValue);
 
     MPI_Finalize();
     return 0;
