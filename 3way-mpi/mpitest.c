@@ -2,6 +2,8 @@
 #include <malloc.h>
 #include "mpi.h"
 
+
+
 int main(int argc, char *argv[])
 {
     int threadId, numOfThreads;
@@ -31,6 +33,12 @@ int main(int argc, char *argv[])
 //        MPI_Send(&num, 1, MPI_INT, next, tag, MPI_COMM_WORLD);
     }
 
+    MPI_Bcast(xValue, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast(yValue, 1, MPI_INT, 0, MPI_COMM_WORLD);
+
+    if(threadId == 0) {
+        *xValue = 3;
+    }
     /* Pass the message around the ring.  The exit mechanism works */
     /* as follows: the message (a positive integer) is passed */
     /* around the ring.  Each time is passes rank 0, it is decremented. */
