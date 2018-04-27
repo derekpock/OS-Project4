@@ -9,7 +9,6 @@ int main(int argc, char *argv[])
     /* Start up MPI */
 
     int *yValue;
-    int *zValue;
     yValue = malloc(sizeof(int));
     *yValue = 1;
 
@@ -18,15 +17,10 @@ int main(int argc, char *argv[])
     MPI_Comm_size(MPI_COMM_WORLD, &numOfThreads);
 
     int *xValue;
-    int *aValue;
     xValue = malloc(sizeof(int));
     *xValue = 1;
 
     if (threadId == 0) {
-        zValue = malloc(sizeof(int));
-        aValue = malloc(sizeof(int));
-        *zValue = 2;
-        *aValue = 2;
         *xValue = 2;
         *yValue = 2;
 //        printf("Enter the number of times around the ring: ");
@@ -71,7 +65,7 @@ int main(int argc, char *argv[])
 
     /* Quit */
 
-    printf("Thread %d has values of before %d and after %d, also %d and %d.\n", threadId, *yValue, *xValue, *zValue, *aValue);
+    printf("Thread %d has values of before %d and after %d, also %d and %d.\n", threadId, *yValue, *xValue);
 
     MPI_Finalize();
     return 0;
