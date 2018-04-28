@@ -11,8 +11,13 @@ add_executable(OS_Project4
 #        longestCommonSubstringSingle.c
 #        readInFile.c
 #        singleThread.c
+<<<<<<< HEAD
 #        3way-openmp/openmp.c
 #        3way-mpi/mpitest.c
          3way-mpi/dwarves/mpi.c
         )
+=======
+        3way-pthread/dwarves/pthread.c
+        3way-mpi/mpitest.c)
+>>>>>>> 2ac2c4ab1dfe087c95e122364d8b9501929f39b1
 
