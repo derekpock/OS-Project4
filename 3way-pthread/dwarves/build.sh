@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gcc --std=c11 -fopenmp -o openmp openmp.c
+gcc --std=c11 -lpthread -o pthread pthread.c
