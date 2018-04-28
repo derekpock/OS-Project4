@@ -11,6 +11,6 @@ add_executable(OS_Project4
 #        longestCommonSubstringSingle.c
 #        readInFile.c
 #        singleThread.c
-        3way-openmp/openmp.c
+        3way-pthread/dwarves/pthread.c
         3way-mpi/mpitest.c)
 
