@@ -124,8 +124,9 @@ int main(int argc, char *argv[]) {
     offset += sizeof(char**);
     memcpy(arg + offset, &results, sizeof(char**));
 
-    for (int rc, i = 0; i < numberOfThreads; i++ ) {
+    for (int rc, i = 0; i < numberOfThreads; i++) {
         memcpy(arg, &i, sizeof(int));
+        printf("creating thread %d\n", *((int*)arg));
         rc = pthread_create(&threads[i], &attr, threadRun, arg);
         if (rc) {
             printf("Error! Return code from pthread_create() is %d\n", rc);
