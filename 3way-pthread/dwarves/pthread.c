@@ -123,10 +123,14 @@ int main(int argc, char *argv[]) {
     memcpy(arg + offset, &fileData, sizeof(char**));
     offset += sizeof(char**);
     memcpy(arg + offset, &results, sizeof(char**));
+    offset += sizeof(char**);
 
+    void *threadArgs[numberOfThreads];
     for (int rc, i = 0; i < numberOfThreads; i++) {
-        memcpy(arg, &i, sizeof(int));
-        printf("creating thread %d\n", *((int*)arg));
+        memcpy(threadArgs[i], arg, offset);
+        memcpy(threadArgs[i], &i, sizeof(int));
+        //memcpy(arg, &i, sizeof(int));
+        printf("Creating thread %d\n", *((int*)arg));
         rc = pthread_create(&threads[i], &attr, threadRun, arg);
         if (rc) {
             printf("Error! Return code from pthread_create() is %d\n", rc);
