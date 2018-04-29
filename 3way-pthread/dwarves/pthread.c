@@ -124,7 +124,7 @@ int main(int argc, char *argv[]) {
     offset += sizeof(char**);
     memcpy(arg + offset, &results, sizeof(char**));
 
-    for (int rc, i = 0; i < numberOfThreads; i++ ) {
+    for (int rc, i = 1; i < numberOfThreads; i++ ) {
         memcpy(arg, &i, sizeof(int));
         rc = pthread_create(&threads[i], &attr, threadRun, arg);
         if (rc) {
@@ -133,8 +133,10 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    /* Free attribute and wait for the other threads */
     pthread_attr_destroy(&attr);
+    memset(arg, 0, sizeof(int));
+    threadRun(arg);
+    
     void *status;
     for(int rc, i = 0; i < numberOfThreads; i++) {
         rc = pthread_join(threads[i], &status);
