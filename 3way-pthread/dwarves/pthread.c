@@ -130,8 +130,8 @@ int main(int argc, char *argv[]) {
         memcpy(threadArgs[i], arg, offset);
         memcpy(threadArgs[i], &i, sizeof(int));
         //memcpy(arg, &i, sizeof(int));
-        printf("Creating thread %d\n", *((int*)arg));
-        rc = pthread_create(&threads[i], &attr, threadRun, arg);
+        printf("Creating thread %d\n", *((int*)threadArgs[i]));
+        rc = pthread_create(&threads[i], &attr, threadRun, threadArgs[i]);
         if (rc) {
             printf("Error! Return code from pthread_create() is %d\n", rc);
             return -1;
