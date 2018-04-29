@@ -174,7 +174,14 @@ void* threadRun(void *arg) {
 
     unsigned offset = 0;
     memcpy(&threadNumber, arg + offset, sizeof(int));
-    //TODO continue
+    offset += sizeof(int);
+    memcpy(&numberOfThreads, arg + offset, sizeof(int));
+    offset += sizeof(int);
+    memcpy(&numberOfLines, arg + offset, sizeof(unsigned long));
+    offset += sizeof(unsigned long);
+    memcpy(&fileData, arg + offset, sizeof(char**));
+    offset += sizeof(char**);
+    memcpy(&results, arg + offset, sizeof(char**));
 
     // Determine our quota.
     unsigned long quota = numberOfLines / numberOfThreads;

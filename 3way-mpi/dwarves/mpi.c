@@ -1,5 +1,4 @@
 #define _GNU_SOURCE
-#include <omp.h>
 #include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,6 +25,10 @@ int main(int argc, char *argv[]) {
 
     unsigned long numberOfLinesToProcess = 1000;
     char verbosity = 1;
+    unsigned long lineNumber = 0;
+    char** fileData = NULL;
+    char** results;
+    unsigned long *line_sizes;
 
     if(threadId == 0) {
         for(int i = 1; i < argc; i++) {
@@ -64,70 +67,95 @@ int main(int argc, char *argv[]) {
                 MPI_Abort(MPI_COMM_WORLD, -1);
             }
         }
-    }
-    MPI_Bcast(&numberOfLinesToProcess, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    MPI_Bcast(&verbosity, 1, MPI_INT, 0, MPI_COMM_WORLD);
+        // Prepare and open the file.
+        char* filePath = "/homes/dan/625/wiki_dump.txt";
+//        char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
 
+        if(verbosity == 2) {
+            printf("Running with %d threads on %lu lines.\n", numberOfThreads, numberOfLinesToProcess);
+            printf("File path: %s\n", filePath);
+        }
 
-//    char* a = "asdfghj\r\n";
-//    char* b = "asdfghj";
-//    printf("%s\n", findLongestSubstring(a, b));
-//    return 0;
-    // Prepare and open the file.
-    char* filePath = "/homes/dan/625/wiki_dump.txt";
-//    char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
-
-    if(verbosity == 2) {
-        printf("Running with %d threads on %lu lines.\n", numberOfThreads, numberOfLinesToProcess);
-        printf("File path: %s\n", filePath);
-    }
-
-    FILE *fp = fopen(filePath, "r");
-    if(fp == NULL) {
-        printf("Error! Unable to open file!");
-        MPI_Abort(MPI_COMM_WORLD, -1);
-    }
-
-    // Read in the file line by line. Put data in fileData.
-    unsigned long lineNumber = 0;
-    long read;
-    char* line = NULL;
-    unsigned long lineLength;
-    char** fileData = NULL;
-    while (lineNumber < numberOfLinesToProcess && (read = getline(&line, &lineLength, fp)) != -1) {
-        fileData = realloc(fileData, sizeof(char*) * (lineNumber + 1));
-        if(fileData == NULL) {
-            printf("Error! Unable to allocate memory for fileData: size %lu\n", (lineNumber + 1));
+        FILE *fp = fopen(filePath, "r");
+        if(fp == NULL) {
+            printf("Error! Unable to open file!");
             MPI_Abort(MPI_COMM_WORLD, -1);
         }
-        fileData[lineNumber++] = line;
-        line = NULL;    // Dereference line to keep fileData unchanged while reading next line.
-    }
-    if(fileData == NULL) {
-        printf("Error! Unable to read from file!\n");
-        MPI_Abort(MPI_COMM_WORLD, -1);
-    }
-    fclose(fp);
 
+        // Read in the file line by line. Put data in fileData.
+        long read;
+        char* line = NULL;
+        unsigned long lineLength;
+        while (lineNumber < numberOfLinesToProcess && (read = getline(&line, &lineLength, fp)) != -1) {
+            fileData = realloc(fileData, sizeof(char*) * (lineNumber + 1));
+            if(fileData == NULL) {
+                printf("Error! Unable to allocate memory for fileData: size %lu\n", (lineNumber + 1));
+                MPI_Abort(MPI_COMM_WORLD, -1);
+            }
+            fileData[lineNumber++] = line;
+            line = NULL;    // Dereference line to keep fileData unchanged while reading next line.
+        }
+        if(fileData == NULL) {
+            printf("Error! Unable to read from file!\n");
+            MPI_Abort(MPI_COMM_WORLD, -1);
+        }
+        fclose(fp);
+
+        line_sizes = malloc(sizeof(unsigned long) * lineNumber);
+        for (int i = 0; i < lineNumber; i++) {
+            line_sizes[i] = strlen(fileData[i]) + 1;
+        }
+    }
     // Prepare the results.
-    char** results = malloc(sizeof(char*) * (lineNumber - 1));     // With 100 lines, we have 99 comparisons.
+    results = calloc(sizeof(char*), (lineNumber - 1));     // With 100 lines, we have 99 comparisons.
     if(results == NULL) {
         printf("Error! Unable to allocate memory for results: size %lu\n", (lineNumber - 1));
         MPI_Abort(MPI_COMM_WORLD, -1);
     }
 
-    // Compare all of the substrings. Begin thread section.
-
-    threadRun(omp_get_thread_num(), numberOfThreads, lineNumber, fileData, results);
-
-    if(verbosity != 0) {
-        // End thread section. Print the results.
-        for(unsigned long i = 0; i < (lineNumber - 1); i++) {
-//        printf("%lu-%lu: '%s'\n", i, (i + 1), results[i]);
-            printf("%lu-%lu: %s\n", i, (i + 1), results[i]);
-        }
+    // Broadcast number of lines
+    MPI_Bcast(&lineNumber, 1, MPI_UNSIGNED_LONG, 0, MPI_COMM_WORLD);
+    // For all the other threads
+    if(threadId != 0) {
+        // Create the line_sizes array before receiving info
+        line_sizes = malloc(sizeof(unsigned long) * lineNumber);
+        // Create the fileData array before receiving info
+        fileData = malloc(sizeof(char*) * (lineNumber));
+    }
+    // Broadcast the line numbers.
+    MPI_Bcast(&line_sizes, lineNumber, MPI_INT, 0, MPI_COMM_WORLD);
+    for (int i = 0; i < lineNumber; i++) {
+        // Broadcast each line in the fileData.
+        MPI_Bcast(&fileData[i], line_sizes[i], MPI_CHAR, 0, MPI_COMM_WORLD);
     }
 
+    // Compare all of the substrings. Begin thread section.
+    threadRun(*threadId, *numOfThreads, lineNumber, fileData, results);
+
+    char** receiveBuffer;
+
+    if(threadId == 0) {
+        receiveBuffer = malloc(sizeof(char**) * (lineNumber - 1));
+    }
+
+    for(int i = 0; i < lineNumber; i++) {
+        unsigned long strLength;
+        if(results[i] != 0) {
+            strLength = strlen(results[i]) + 1;
+            MPI_Bcast(&strLength, 1, MPI_UNSIGNED_LONG, threadId, MPI_COMM_WORLD);
+        }
+        MPI_Reduce(results[i],  3, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    }
+
+    if(threadId == 0) {
+        if(verbosity != 0) {
+            // End thread section. Print the results.
+            for(unsigned long i = 0; i < (lineNumber - 1); i++) {
+//        printf("%lu-%lu: '%s'\n", i, (i + 1), results[i]);
+                printf("%lu-%lu: %s\n", i, (i + 1), results[i]);
+            }
+        }
+    }
     // Free all memory.
     for(unsigned long i = 0; i < (lineNumber - 1); i++) {
         free(results[i]);
@@ -136,6 +164,7 @@ int main(int argc, char *argv[]) {
     free(fileData[lineNumber]);
     free(results);
     free(fileData);
+    MPI_Finalize();
 }
 
 void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results) {
