@@ -136,7 +136,7 @@ int main(int argc, char *argv[]) {
     pthread_attr_destroy(&attr);
     memset(arg, 0, sizeof(int));
     threadRun(arg);
-    
+
     void *status;
     for(int rc, i = 0; i < numberOfThreads; i++) {
         rc = pthread_join(threads[i], &status);
@@ -223,7 +223,10 @@ void* threadRun(void *arg) {
         results[i + firstLine] = localResults[i];
     }
     free(localResults);
-    pthread_exit(NULL);
+
+    if(threadNumber != 0) {
+        pthread_exit(NULL);
+    }
 }
 
 // Returns the longest common string between a and b. Be sure to free the returned char* when done.
