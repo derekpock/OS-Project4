@@ -124,7 +124,7 @@ int main(int argc, char *argv[]) {
     offset += sizeof(char**);
     memcpy(arg + offset, &results, sizeof(char**));
 
-    for (int rc, i = 1; i < numberOfThreads; i++ ) {
+    for (int rc, i = 0; i < numberOfThreads; i++ ) {
         memcpy(arg, &i, sizeof(int));
         rc = pthread_create(&threads[i], &attr, threadRun, arg);
         if (rc) {
@@ -133,18 +133,19 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    printf("Main thread before.\n");
     pthread_attr_destroy(&attr);
-    memset(arg, 0, sizeof(int));
-    threadRun(arg);
-
+    printf("Main thread after.\n");
     void *status;
     for(int rc, i = 0; i < numberOfThreads; i++) {
         rc = pthread_join(threads[i], &status);
+        printf("Main thread joined.\n");
         if (rc) {
             printf("Error! Return code from pthread_join() is %d\n", rc);
             return -1;
         }
     }
+    printf("Main thread finished.\n");
 
     if(verbosity != 0) {
         // End thread section. Print the results.
@@ -185,6 +186,8 @@ void* threadRun(void *arg) {
     offset += sizeof(char**);
     memcpy(&results, arg + offset, sizeof(char**));
 
+    printf("Thread %d starting.\n", threadNumber);
+
     // Determine our quota.
     unsigned long quota = numberOfLines / numberOfThreads;
     if(quota * numberOfThreads < numberOfLines) {
@@ -223,10 +226,8 @@ void* threadRun(void *arg) {
         results[i + firstLine] = localResults[i];
     }
     free(localResults);
-
-    if(threadNumber != 0) {
-        pthread_exit(NULL);
-    }
+    printf("Thread %d finished.\n", threadNumber);
+    pthread_exit(NULL);
 }
 
 // Returns the longest common string between a and b. Be sure to free the returned char* when done.
