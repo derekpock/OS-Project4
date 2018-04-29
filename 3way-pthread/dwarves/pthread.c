@@ -127,6 +127,7 @@ int main(int argc, char *argv[]) {
 
     void *threadArgs[numberOfThreads];
     for (int rc, i = 0; i < numberOfThreads; i++) {
+        threadArgs[i] = malloc(offset);
         memcpy(threadArgs[i], arg, offset);
         memcpy(threadArgs[i], &i, sizeof(int));
         //memcpy(arg, &i, sizeof(int));
@@ -144,6 +145,7 @@ int main(int argc, char *argv[]) {
     void *status;
     for(int rc, i = 0; i < numberOfThreads; i++) {
         rc = pthread_join(threads[i], &status);
+        free(threadArgs[i]);
         printf("Main thread joined.\n");
         if (rc) {
             printf("Error! Return code from pthread_join() is %d\n", rc);
