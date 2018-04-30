@@ -25,6 +25,7 @@ int main(int argc, char *argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &numOfThreads);
 
     unsigned long numberOfLinesToProcess = 1000;
+    unsigned long localQuota;
     char verbosity = 1;
     unsigned long lineNumber = 0;
     char** fileData = NULL;
@@ -196,7 +197,7 @@ int main(int argc, char *argv[]) {
             }
 
             // Correct quota if necessary.
-            unsigned long localQuota = lastLine - firstLine;
+            localQuota = lastLine - firstLine;
             if(quota < 0) {
                 quota = 0;
             }
@@ -229,7 +230,7 @@ int main(int argc, char *argv[]) {
         }
 
         // Correct quota if necessary.
-        unsigned long localQuota = lastLine - firstLine;
+        localQuota = lastLine - firstLine;
         if(quota < 0) {
             quota = 0;
         }
@@ -310,12 +311,20 @@ int main(int argc, char *argv[]) {
 
     printf("Thread-%d: freeing memory\n", threadId);
 
-    // Free all memory.
-    for(unsigned long i = 0; i < (lineNumber - 1); i++) {
-        free(results[i]);
-        free(fileData[i]);
+    if(threadId == 0) {
+        for(unsigned long i = 0; i < (lineNumber - 1); i++) {
+            free(results[i]);
+            free(fileData[i]);
+        }
+        free(fileData[lineNumber]);
+    } else {
+        for(unsigned long i = 0; i < localQuota; i++) {
+            free(results[i]);
+            free(fileData[i]);
+        }
+        free(fileData[localQuota]);
     }
-    free(fileData[lineNumber]);
+    // Free all memory.
     free(results);
     free(fileData);
     free(line_sizes);
