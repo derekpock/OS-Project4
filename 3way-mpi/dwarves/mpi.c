@@ -154,7 +154,7 @@ int main(int argc, char *argv[]) {
             for(unsigned long j = 0; j <= localQuota; j++) {
                 // Send line (j + firstLine) to thread i
                 MPI_Send(&line_sizes[j + firstLine], 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD);
-                MPI_Send(&fileData[j + firstLine], (int)line_sizes[j + firstLine], MPI_UNSIGNED_CHAR, i, 1, MPI_COMM_WORLD);
+                MPI_Send(fileData[j + firstLine], (int)line_sizes[j + firstLine], MPI_UNSIGNED_CHAR, i, 1, MPI_COMM_WORLD);
             }
         }
 
@@ -204,7 +204,7 @@ int main(int argc, char *argv[]) {
                 // Put line (j + firstLine) from thread i into results
                 unsigned long lineLength = 0;
                 MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-                MPI_Recv(&results[j + firstLine], (int)lineLength, MPI_UNSIGNED_CHAR, i, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                MPI_Recv(results[j + firstLine], (int)lineLength, MPI_UNSIGNED_CHAR, i, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
             }
         }
         if(verbosity != 0) {
@@ -234,7 +234,7 @@ int main(int argc, char *argv[]) {
         for(unsigned long j = 0; j <= localQuota; j++) {
             unsigned long lineLength = 0;
             MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD,  MPI_STATUS_IGNORE);
-            MPI_Recv(&fileData[j], (int)lineLength, MPI_UNSIGNED_CHAR, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            MPI_Recv(fileData[j], (int)lineLength, MPI_UNSIGNED_CHAR, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         }
 
         /// RUN OPERATION
@@ -251,7 +251,7 @@ int main(int argc, char *argv[]) {
         for(unsigned long j = 0; j < localQuota; j++) {
             line_sizes[j] = strlen(fileData[j]) + 1;
             MPI_Send(&line_sizes[j], 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
-            MPI_Send(&fileData[j], (int)line_sizes[j], MPI_UNSIGNED_CHAR, 0, 1, MPI_COMM_WORLD);
+            MPI_Send(fileData[j], (int)line_sizes[j], MPI_UNSIGNED_CHAR, 0, 1, MPI_COMM_WORLD);
         }
     }
 
