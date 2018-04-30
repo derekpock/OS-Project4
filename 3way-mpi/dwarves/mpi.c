@@ -17,8 +17,8 @@ struct ListItem {
 };
 
 int main(int argc, char *argv[]) {
-    int *threadId;
-    int *numOfThreads;
+    int *threadId = malloc(sizeof(int));
+    int *numOfThreads = malloc(sizeof(int));
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, threadId);
