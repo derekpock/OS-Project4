@@ -316,7 +316,7 @@ int main(int argc, char *argv[]) {
 void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results) {
     // Complete quota to local results.
     for(int i = 0; i < numberOfLines; i++) {
-        printf("%c from %d\n", fileData[i], threadNumber);
+        printf("%s from %d\n", fileData[i], threadNumber);
 //        results[i] = findLongestSubstring(fileData[i], fileData[i + 1]);
 //        results[i + firstLine] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
 //        char* line = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
