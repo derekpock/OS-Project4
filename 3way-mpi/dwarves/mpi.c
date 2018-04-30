@@ -202,8 +202,7 @@ int main(int argc, char *argv[]) {
                 quota = 0;
             }
 
-            // Using j <= localQuota because thread x compares line n to n+1, and thread (x+1) compares line n+1 to n+2...
-            for(unsigned long j = 0; j <= localQuota; j++) {
+            for(unsigned long j = 0; j < localQuota; j++) {
                 // Put line (j + firstLine) from thread i into results
                 unsigned long lineLength = 0;
                 MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
@@ -214,7 +213,6 @@ int main(int argc, char *argv[]) {
             }
         }
         if(verbosity != 0) {
-            printf("Thread-%d: printing\n", threadId);
             for(unsigned long i = 0; i < (lineNumber - 1); i++) {
                 printf("%lu-%lu: %s\n", i, (i + 1), results[i]);
             }
