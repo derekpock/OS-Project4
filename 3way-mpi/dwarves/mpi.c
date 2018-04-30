@@ -314,6 +314,9 @@ int main(int argc, char *argv[]) {
 }
 
 void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results) {
+    if(threadNumber == 0) {
+        return;
+    }
     // Complete quota to local results.
     for(int i = 0; i < numberOfLines; i++) {
         printf("%s from %d\n", fileData[i], threadNumber);
