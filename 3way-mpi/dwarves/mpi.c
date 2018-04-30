@@ -17,12 +17,12 @@ struct ListItem {
 };
 
 int main(int argc, char *argv[]) {
-    int *threadId = malloc(sizeof(int));
-    int *numOfThreads = malloc(sizeof(int));
+    int threadId;
+    int numOfThreads;
 
     MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, threadId);
-    MPI_Comm_size(MPI_COMM_WORLD, numOfThreads);
+    MPI_Comm_rank(MPI_COMM_WORLD, &threadId);
+    MPI_Comm_size(MPI_COMM_WORLD, &numOfThreads);
 
     unsigned long numberOfLinesToProcess = 1000;
     char verbosity = 1;
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     char** results;
     unsigned long *line_sizes;
 
-    printf("Thread-%d: initialized\n", *threadId);
+    printf("Thread-%d: initialized\n", threadId);
 
     if(threadId == 0) {
         for(int i = 1; i < argc; i++) {
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
 //        char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
 
         if(verbosity == 2) {
-            printf("Running with %d threads on %lu lines.\n", *numOfThreads, numberOfLinesToProcess);
+            printf("Running with %d threads on %lu lines.\n", numOfThreads, numberOfLinesToProcess);
             printf("File path: %s\n", filePath);
         }
 
@@ -116,29 +116,29 @@ int main(int argc, char *argv[]) {
             return -1;
         }
 
-        printf("Thread-%d: file loaded\n", *threadId);
+        printf("Thread-%d: file loaded\n", threadId);
     }
 
-    printf("Thread-%d: broadcast lines\n", *threadId);
+    printf("Thread-%d: broadcast lines\n", threadId);
     // Broadcast number of lines
     MPI_Bcast(&lineNumber, 1, MPI_UNSIGNED_LONG, 0, MPI_COMM_WORLD);
 
     // Determine global quota.
-    unsigned long quota = lineNumber / *numOfThreads;
-    if(quota * *numOfThreads < lineNumber) {
+    unsigned long quota = lineNumber / numOfThreads;
+    if(quota * numOfThreads < lineNumber) {
         quota++;
     }
 
-    printf("Thread-%d: global quota\n", *threadId);
+    printf("Thread-%d: global quota\n", threadId);
     // Thread 0 start dispatching work.
     if(threadId == 0) {
-        printf("Thread-%d: dispatching data\n", *threadId);
+        printf("Thread-%d: dispatching data\n", threadId);
         /// DISPATCH DATA TO THREADS
-        for(int i = 1; i < *numOfThreads; i++) {
+        for(int i = 1; i < numOfThreads; i++) {
             // Determine next thread's first and last lines.
             unsigned long firstLine = quota * i;           // First line we need to compare - inclusive.
             unsigned long lastLine = quota * (i + 1);      // Last line we need to compare - inclusive.
-            if(i == (*numOfThreads - 1)) {
+            if(i == (numOfThreads - 1)) {
                 lastLine = lineNumber - 1;                   // If we are the last thread, ensure we get all of the lines.
             }
 
@@ -149,7 +149,7 @@ int main(int argc, char *argv[]) {
             }
 
 
-            printf("Thread-%d: sending data to %d\n", *threadId, i);
+            printf("Thread-%d: sending data to %d\n", threadId, i);
             // Using j <= localQuota because thread x compares line n to n+1, and thread (x+1) compares line n+1 to n+2...
             for(unsigned long j = 0; j <= localQuota; j++) {
                 // Send line (j + firstLine) to thread i
@@ -160,11 +160,11 @@ int main(int argc, char *argv[]) {
 
         {
 
-            printf("Thread-%d: getting personal info\n", *threadId);
+            printf("Thread-%d: getting personal info\n", threadId);
             // Determine next thread's first and last lines.
             unsigned long firstLine = 0;           // First line we need to compare - inclusive.
             unsigned long lastLine = quota;      // Last line we need to compare - inclusive.
-            if ((*numOfThreads) == 1) {
+            if ((numOfThreads) == 1) {
                 lastLine = lineNumber - 1;      // If we are the last thread, ensure we get all of the lines.
             }
 
@@ -176,20 +176,20 @@ int main(int argc, char *argv[]) {
 
             /// RUN OPERATION
 
-            printf("Thread-%d: running\n", *threadId);
-            threadRun(*threadId, *numOfThreads, localQuota, fileData, results);
+            printf("Thread-%d: running\n", threadId);
+            threadRun(threadId, numOfThreads, localQuota, fileData, results);
 
-            printf("Thread-%d: finished\n", *threadId);
+            printf("Thread-%d: finished\n", threadId);
         }
 
         /// COLLECT DATA FROM THREADS
-        for(int i = 1; i < *numOfThreads; i++) {
+        for(int i = 1; i < numOfThreads; i++) {
 
-            printf("Thread-%d: collectino from %d\n", *threadId, i);
+            printf("Thread-%d: collectino from %d\n", threadId, i);
             // Determine next thread's first and last lines.
             unsigned long firstLine = quota * i;           // First line we need to compare - inclusive.
             unsigned long lastLine = quota * (i + 1);      // Last line we need to compare - inclusive.
-            if(i == (*numOfThreads - 1)) {
+            if(i == (numOfThreads - 1)) {
                 lastLine = lineNumber - 1;                   // If we are the last thread, ensure we get all of the lines.
             }
 
@@ -208,18 +208,18 @@ int main(int argc, char *argv[]) {
             }
         }
         if(verbosity != 0) {
-            printf("Thread-%d: printing\n", *threadId);
+            printf("Thread-%d: printing\n", threadId);
             for(unsigned long i = 0; i < (lineNumber - 1); i++) {
                 printf("%lu-%lu: %s\n", i, (i + 1), results[i]);
             }
         }
     } else {
 
-        printf("Thread-%d: receiving data\n", *threadId);
+        printf("Thread-%d: receiving data\n", threadId);
         /// RECEIVE DISPATCHED DATA
-        unsigned long firstLine = quota * *threadId;
-        unsigned long lastLine = quota * (*threadId) + 1;
-        if((*threadId) == (*numOfThreads) - 1) {
+        unsigned long firstLine = quota * threadId;
+        unsigned long lastLine = quota * (threadId) + 1;
+        if((threadId) == (numOfThreads) - 1) {
             lastLine = lineNumber - 1;
         }
 
@@ -239,15 +239,15 @@ int main(int argc, char *argv[]) {
 
         /// RUN OPERATION
 
-        printf("Thread-%d: running\n", *threadId);
-        threadRun(*threadId, *numOfThreads, localQuota, fileData, results);
+        printf("Thread-%d: running\n", threadId);
+        threadRun(threadId, numOfThreads, localQuota, fileData, results);
 
-        printf("Thread-%d: finished\n", *threadId);
+        printf("Thread-%d: finished\n", threadId);
 
         /// SEND DATA TO BE COLLECTED
         line_sizes = malloc(sizeof(unsigned long) * localQuota);
 
-        printf("Thread-%d: sending data to be collected\n", *threadId);
+        printf("Thread-%d: sending data to be collected\n", threadId);
         for(unsigned long j = 0; j < localQuota; j++) {
             line_sizes[j] = strlen(fileData[j]) + 1;
             MPI_Send(&line_sizes[j], 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
@@ -281,7 +281,7 @@ int main(int argc, char *argv[]) {
 //    }
 //
 //    // Compare all of the substrings. Begin thread section.
-//    threadRun(*threadId, *numOfThreads, lineNumber, fileData, results);
+//    threadRun(threadId, numOfThreads, lineNumber, fileData, results);
 //
 //    char** receiveBuffer;
 //
@@ -299,7 +299,7 @@ int main(int argc, char *argv[]) {
 //    }
 
 
-    printf("Thread-%d: freeing memory\n", *threadId);
+    printf("Thread-%d: freeing memory\n", threadId);
 
     // Free all memory.
     for(unsigned long i = 0; i < (lineNumber - 1); i++) {
