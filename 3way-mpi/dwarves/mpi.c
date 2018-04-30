@@ -204,6 +204,7 @@ int main(int argc, char *argv[]) {
                 // Put line (j + firstLine) from thread i into results
                 unsigned long lineLength = 0;
                 MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                results[j + firstLine] = malloc(sizeof(char) * lineLength);
                 MPI_Recv(&results[j + firstLine], (int)lineLength, MPI_UNSIGNED_CHAR, i, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
             }
         }
@@ -234,6 +235,7 @@ int main(int argc, char *argv[]) {
         for(unsigned long j = 0; j <= localQuota; j++) {
             unsigned long lineLength = 0;
             MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD,  MPI_STATUS_IGNORE);
+            fileData[j] = malloc(sizeof(char) * lineLength);
             MPI_Recv(&fileData[j], (int)lineLength, MPI_UNSIGNED_CHAR, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         }
 
