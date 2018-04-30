@@ -323,13 +323,10 @@ int main(int argc, char *argv[]) {
 }
 
 void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results) {
-    if(threadNumber == 0) {
-        return;
-    }
     // Complete quota to local results.
     for(int i = 0; i < numberOfLines; i++) {
-        printf("%s from %d\n", fileData[i], threadNumber);
-//        results[i] = findLongestSubstring(fileData[i], fileData[i + 1]);
+//        printf("%s from %d\n", fileData[i], threadNumber);
+        results[i] = findLongestSubstring(fileData[i], fileData[i + 1]);
 //        results[i + firstLine] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
 //        char* line = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
 //        printf("%lu: %s\n", (i + firstLine), line);
