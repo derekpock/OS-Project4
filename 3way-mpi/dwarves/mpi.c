@@ -259,7 +259,7 @@ int main(int argc, char *argv[]) {
             line_sizes[j] = strlen(results[j]) + 1;
             MPI_Send(&line_sizes[j], 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
             for(unsigned long k = 0; k < line_sizes[j]; k++) {
-                MPI_Recv(&(results[j][k]), 1, MPI_UNSIGNED_CHAR, 0, k+1, MPI_COMM_WORLD);
+                MPI_Send(&(results[j][k]), 1, MPI_UNSIGNED_CHAR, 0, k+1, MPI_COMM_WORLD);
             }
         }
     }
