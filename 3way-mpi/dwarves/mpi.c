@@ -1,5 +1,3 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCDFAInspection"
 #define _GNU_SOURCE
 #include <malloc.h>
 #include <stdio.h>
@@ -442,5 +440,3 @@ char* findLongestSubstring(char* a, char* b) {
     longestString[longestValue] = '\0';
     return longestString;
 }
-
-#pragma clang diagnostic pop
