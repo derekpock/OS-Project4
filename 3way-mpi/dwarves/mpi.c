@@ -21,8 +21,8 @@ int main(int argc, char *argv[]) {
     int *numOfThreads;
 
     MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &threadId);
-    MPI_Comm_size(MPI_COMM_WORLD, &numOfThreads);
+    MPI_Comm_rank(MPI_COMM_WORLD, threadId);
+    MPI_Comm_size(MPI_COMM_WORLD, numOfThreads);
 
     unsigned long numberOfLinesToProcess = 1000;
     char verbosity = 1;
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
 //        char* filePath = "C:\\OS-Project4\\wiki_dump.txt";
 
         if(verbosity == 2) {
-            printf("Running with %d threads on %lu lines.\n", numberOfThreads, numberOfLinesToProcess);
+            printf("Running with %d threads on %lu lines.\n", *numOfThreads, numberOfLinesToProcess);
             printf("File path: %s\n", filePath);
         }
 
