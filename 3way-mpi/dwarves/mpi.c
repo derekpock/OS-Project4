@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <memory.h>
 #include <time.h>
+#include "mpi.h"
 
 char* findLongestSubstring(char* a, char* b);
 void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results);
