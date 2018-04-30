@@ -208,6 +208,7 @@ int main(int argc, char *argv[]) {
                 MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 results[j + firstLine] = malloc(sizeof(char) * lineLength);
                 for(unsigned long k = 0; k < lineLength; k++) {
+                    printf("%d sending %d\n", threadId, j*10000 + k);
                     MPI_Recv(&(results[j + firstLine][k]), 1, MPI_UNSIGNED_CHAR, i, k+1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 }
             }
@@ -240,6 +241,7 @@ int main(int argc, char *argv[]) {
             MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD,  MPI_STATUS_IGNORE);
             fileData[j] = malloc(sizeof(char) * lineLength);
             for(unsigned long k = 0; k < lineLength; k++) {
+                printf("%d waiting for %d\n", threadId, j*10000 + k);
                 MPI_Recv(&(fileData[j][k]), 1, MPI_UNSIGNED_CHAR, 0, k+1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
             }
         }
