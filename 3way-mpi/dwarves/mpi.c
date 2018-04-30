@@ -105,57 +105,172 @@ int main(int argc, char *argv[]) {
         for (int i = 0; i < lineNumber; i++) {
             line_sizes[i] = strlen(fileData[i]) + 1;
         }
-    }
-    // Prepare the results.
-    results = calloc(sizeof(char*), (lineNumber - 1));     // With 100 lines, we have 99 comparisons.
-    if(results == NULL) {
-        printf("Error! Unable to allocate memory for results: size %lu\n", (lineNumber - 1));
-        MPI_Abort(MPI_COMM_WORLD, -1);
-    }
 
+        // Prepare the results.
+        results = malloc(sizeof(char*) * (lineNumber - 1));     // With 100 lines, we have 99 comparisons.
+        if(results == NULL) {
+            printf("Error! Unable to allocate memory for results: size %lu\n", (lineNumber - 1));
+            return -1;
+        }
+
+    }
     // Broadcast number of lines
     MPI_Bcast(&lineNumber, 1, MPI_UNSIGNED_LONG, 0, MPI_COMM_WORLD);
-    // For all the other threads
-    if(threadId != 0) {
-        // Create the line_sizes array before receiving info
-        line_sizes = malloc(sizeof(unsigned long) * lineNumber);
-        // Create the fileData array before receiving info
-        fileData = malloc(sizeof(char*) * (lineNumber));
-    }
-    // Broadcast the line numbers.
-    MPI_Bcast(&line_sizes, lineNumber, MPI_INT, 0, MPI_COMM_WORLD);
-    for (int i = 0; i < lineNumber; i++) {
-        // Broadcast each line in the fileData.
-        MPI_Bcast(&fileData[i], line_sizes[i], MPI_CHAR, 0, MPI_COMM_WORLD);
+
+    // Determine global quota.
+    unsigned long quota = lineNumber / *numOfThreads;
+    if(quota * *numOfThreads < lineNumber) {
+        quota++;
     }
 
-    // Compare all of the substrings. Begin thread section.
-    threadRun(*threadId, *numOfThreads, lineNumber, fileData, results);
-
-    char** receiveBuffer;
-
+    // Thread 0 start dispatching work.
     if(threadId == 0) {
-        receiveBuffer = malloc(sizeof(char**) * (lineNumber - 1));
-    }
+        /// DISPATCH DATA TO THREADS
+        for(int i = 1; i < *numOfThreads; i++) {
+            // Determine next thread's first and last lines.
+            unsigned long firstLine = quota * i;           // First line we need to compare - inclusive.
+            unsigned long lastLine = quota * (i + 1);      // Last line we need to compare - inclusive.
+            if(i == (*numOfThreads - 1)) {
+                lastLine = lineNumber - 1;                   // If we are the last thread, ensure we get all of the lines.
+            }
 
-    for(int i = 0; i < lineNumber; i++) {
-        unsigned long strLength;
-        if(results[i] != 0) {
-            strLength = strlen(results[i]) + 1;
-            MPI_Bcast(&strLength, 1, MPI_UNSIGNED_LONG, threadId, MPI_COMM_WORLD);
+            // Correct quota if necessary.
+            unsigned long localQuota = lastLine - firstLine;
+            if(quota < 0) {
+                quota = 0;
+            }
+
+            // Using j <= localQuota because thread x compares line n to n+1, and thread (x+1) compares line n+1 to n+2...
+            for(unsigned long j = 0; j <= localQuota; j++) {
+                // Send line (j + firstLine) to thread i
+                MPI_Send(&line_sizes[j + firstLine], 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD);
+                MPI_Send(&fileData[j + firstLine], (int)line_sizes[j + firstLine], MPI_UNSIGNED_CHAR, i, 1, MPI_COMM_WORLD);
+            }
         }
-        MPI_Reduce(results[i],  3, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
-    }
 
-    if(threadId == 0) {
+        {
+            // Determine next thread's first and last lines.
+            unsigned long firstLine = 0;           // First line we need to compare - inclusive.
+            unsigned long lastLine = quota;      // Last line we need to compare - inclusive.
+            if ((*numOfThreads) == 1) {
+                lastLine = lineNumber - 1;      // If we are the last thread, ensure we get all of the lines.
+            }
+
+            // Correct quota if necessary.
+            unsigned long localQuota = lastLine - firstLine;
+            if (quota < 0) {
+                quota = 0;
+            }
+
+            /// RUN OPERATION
+            threadRun(*threadId, *numOfThreads, localQuota, fileData, results);
+        }
+
+        /// COLLECT DATA FROM THREADS
+        for(int i = 1; i < *numOfThreads; i++) {
+            // Determine next thread's first and last lines.
+            unsigned long firstLine = quota * i;           // First line we need to compare - inclusive.
+            unsigned long lastLine = quota * (i + 1);      // Last line we need to compare - inclusive.
+            if(i == (*numOfThreads - 1)) {
+                lastLine = lineNumber - 1;                   // If we are the last thread, ensure we get all of the lines.
+            }
+
+            // Correct quota if necessary.
+            unsigned long localQuota = lastLine - firstLine;
+            if(quota < 0) {
+                quota = 0;
+            }
+
+            // Using j <= localQuota because thread x compares line n to n+1, and thread (x+1) compares line n+1 to n+2...
+            for(unsigned long j = 0; j <= localQuota; j++) {
+                // Put line (j + firstLine) from thread i into results
+                unsigned long lineLength = 0;
+                MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                MPI_Recv(&results[j + firstLine], (int)lineLength, MPI_UNSIGNED_CHAR, i, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            }
+        }
         if(verbosity != 0) {
-            // End thread section. Print the results.
             for(unsigned long i = 0; i < (lineNumber - 1); i++) {
-//        printf("%lu-%lu: '%s'\n", i, (i + 1), results[i]);
                 printf("%lu-%lu: %s\n", i, (i + 1), results[i]);
             }
         }
+    } else {
+        /// RECEIVE DISPATCHED DATA
+        unsigned long firstLine = quota * *threadId;
+        unsigned long lastLine = quota * (*threadId) + 1;
+        if((*threadId) == (*numOfThreads) - 1) {
+            lastLine = lineNumber - 1;
+        }
+
+        // Correct quota if necessary.
+        unsigned long localQuota = lastLine - firstLine;
+        if(quota < 0) {
+            quota = 0;
+        }
+
+        fileData = malloc(sizeof(char*) * (localQuota + 1));
+        results = malloc(sizeof(char*) * localQuota);
+        for(unsigned long j = 0; j <= localQuota; j++) {
+            unsigned long lineLength = 0;
+            MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD,  MPI_STATUS_IGNORE);
+            MPI_Recv(&fileData[j], (int)lineLength, MPI_UNSIGNED_CHAR, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        }
+
+        /// RUN OPERATION
+        threadRun(*threadId, *numOfThreads, localQuota, fileData, results);
+
+        /// SEND DATA TO BE COLLECTED
+        line_sizes = malloc(sizeof(unsigned long) * localQuota);
+        for(unsigned long j = 0; j < localQuota; j++) {
+            line_sizes[j] = strlen(fileData[j]) + 1;
+            MPI_Send(&line_sizes[j], 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
+            MPI_Send(&fileData[j], (int)line_sizes[j], MPI_UNSIGNED_CHAR, 0, 1, MPI_COMM_WORLD);
+        }
     }
+
+
+
+
+
+//    // Prepare the results.
+//    results = calloc(sizeof(char*), (lineNumber - 1));     // With 100 lines, we have 99 comparisons.
+//    if(results == NULL) {
+//        printf("Error! Unable to allocate memory for results: size %lu\n", (lineNumber - 1));
+//        MPI_Abort(MPI_COMM_WORLD, -1);
+//    }
+//
+//    // For all the other threads
+//    if(threadId != 0) {
+//        // Create the line_sizes array before receiving info
+//        line_sizes = malloc(sizeof(unsigned long) * lineNumber);
+//        // Create the fileData array before receiving info
+//        fileData = malloc(sizeof(char*) * (lineNumber));
+//    }
+//    // Broadcast the line numbers.
+//    MPI_Bcast(&line_sizes, lineNumber, MPI_INT, 0, MPI_COMM_WORLD);
+//    for (int i = 0; i < lineNumber; i++) {
+//        // Broadcast each line in the fileData.
+//        MPI_Bcast(&fileData[i], line_sizes[i], MPI_CHAR, 0, MPI_COMM_WORLD);
+//    }
+//
+//    // Compare all of the substrings. Begin thread section.
+//    threadRun(*threadId, *numOfThreads, lineNumber, fileData, results);
+//
+//    char** receiveBuffer;
+//
+//    if(threadId == 0) {
+//        receiveBuffer = malloc(sizeof(char**) * (lineNumber - 1));
+//    }
+//
+//    for(int i = 0; i < lineNumber; i++) {
+//        unsigned long strLength;
+//        if(results[i] != 0) {
+//            strLength = strlen(results[i]) + 1;
+//            MPI_Bcast(&strLength, 1, MPI_UNSIGNED_LONG, threadId, MPI_COMM_WORLD);
+//        }
+//        MPI_Reduce(results[i],  3, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+//    }
+
     // Free all memory.
     for(unsigned long i = 0; i < (lineNumber - 1); i++) {
         free(results[i]);
@@ -164,48 +279,19 @@ int main(int argc, char *argv[]) {
     free(fileData[lineNumber]);
     free(results);
     free(fileData);
+    free(line_sizes);
     MPI_Finalize();
 }
 
 void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results) {
-    // Determine our quota.
-    unsigned long quota = numberOfLines / numberOfThreads;
-    if(quota * numberOfThreads < numberOfLines) {
-        quota++;
-    }
-
-    // Determine our first and last lines.
-    unsigned long firstLine = quota * threadNumber;           // First line we need to compare - inclusive.
-    unsigned long lastLine = quota * (threadNumber + 1);      // Last line we need to compare - inclusive.
-    if(threadNumber == (numberOfThreads - 1)) {
-        lastLine = numberOfLines - 1;                   // If we are the last thread, ensure we get all of the lines.
-    }
-
-    // Correct quota if necessary.
-    quota = lastLine - firstLine;
-    if(quota < 0) {
-        quota = 0;
-    }
-
     // Complete quota to local results.
-    char** localResults = malloc(sizeof(char*) * quota);
-    if(localResults == NULL) {
-        printf("Error! Unable to allocate memory for localResults: size %lu\n", quota * sizeof(char*));
-        MPI_Abort(MPI_COMM_WORLD, -1);
-    }
-    for(int i = 0; i < quota; i++) {
-        localResults[i] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
+    for(int i = 0; i < numberOfLines; i++) {
+        results[i] = findLongestSubstring(fileData[i], fileData[i + 1]);
 //        results[i + firstLine] = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
 //        char* line = findLongestSubstring(fileData[i + firstLine], fileData[i + firstLine + 1]);
 //        printf("%lu: %s\n", (i + firstLine), line);
 //        results[firstLine + i] = line;
     }
-
-    // Copy local results to final results.
-    for(int i = 0; i < quota; i++) {
-        results[i + firstLine] = localResults[i];
-    }
-    free(localResults);
 }
 
 // Returns the longest common string between a and b. Be sure to free the returned char* when done.

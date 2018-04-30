@@ -12,7 +12,7 @@ add_executable(OS_Project4
 #        readInFile.c
 #        singleThread.c
 #        3way-openmp/openmp.c
-#        3way-mpi/mpitest.c
-         3way-pthread/dwarves/pthread.c
+        3way-mpi/dwarves/mpi.c
+#         3way-pthread/dwarves/pthread.c
         )
 
