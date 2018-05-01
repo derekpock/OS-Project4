@@ -246,6 +246,7 @@ int main(int argc, char *argv[]) {
                 MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 results[j + firstLine] = malloc(sizeof(char) * lineLength);
                 for(unsigned long k = 0; k < lineLength; k++) {
+                    printf("asking for %d\n", k);
                     MPI_Recv(&(results[j + firstLine][k]), 1, MPI_UNSIGNED_CHAR, i, j*10000 + k, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 }
             }
