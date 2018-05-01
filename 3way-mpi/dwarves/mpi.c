@@ -240,15 +240,16 @@ int main(int argc, char *argv[]) {
                 localQuota = 0;
             }
 
+            int ready = 1;
+            MPI_Send(&ready, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+            printf("Thread-%d: starting collection from %d\n", threadId, i);
             for(unsigned long j = 0; j < localQuota; j++) {
                 // Put line (j + firstLine) from thread i into results
                 unsigned long lineLength = 0;
                 MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 results[j + firstLine] = malloc(sizeof(char) * lineLength);
                 for(unsigned long k = 0; k < lineLength; k++) {
-                    printf("asking for %d\n", j*10000 + k);
                     MPI_Recv(&(results[j + firstLine][k]), 1, MPI_UNSIGNED_CHAR, i, j*10000 + k, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-                    printf("got %d\n", j*10000 + k);
                 }
             }
         }
@@ -260,15 +261,15 @@ int main(int argc, char *argv[]) {
     } else {
         /// SEND DATA TO BE COLLECTED
         line_sizes = malloc(sizeof(unsigned long) * localQuota);
-
+        printf("Thread-%d: waiting to send data\n", threadId);
+        int ready = 0;
+        MPI_Recv(&ready, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         printf("Thread-%d: sending data to be collected size\n", threadId);
         for(unsigned long j = 0; j < localQuota; j++) {
             line_sizes[j] = strlen(results[j]) + 1;
             MPI_Send(&line_sizes[j], 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
             for(unsigned long k = 0; k < line_sizes[j]; k++) {
-                printf("sending%d\n", j*10000 + k);
                 MPI_Send(&(results[j][k]), 1, MPI_UNSIGNED_CHAR, 0, j*10000 + k, MPI_COMM_WORLD);
-                printf("sent%d\n", j*10000 + k);
             }
         }
     }
