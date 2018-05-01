@@ -241,7 +241,7 @@ int main(int argc, char *argv[]) {
             }
 
             int ready = 1;
-            MPI_Send(&ready, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+            MPI_Send(&ready, 1, MPI_INT, i, 9999999999 + i, MPI_COMM_WORLD);
             printf("Thread-%d: starting collection from %d\n", threadId, i);
             for(unsigned long j = 0; j < localQuota; j++) {
                 // Put line (j + firstLine) from thread i into results
@@ -263,7 +263,7 @@ int main(int argc, char *argv[]) {
         line_sizes = malloc(sizeof(unsigned long) * localQuota);
         printf("Thread-%d: waiting to send data\n", threadId);
         int ready = 0;
-        MPI_Recv(&ready, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Recv(&ready, 1, MPI_INT, 0, 9999999999 + threadId, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         printf("Thread-%d: sending data to be collected size\n", threadId);
         for(unsigned long j = 0; j < localQuota; j++) {
             line_sizes[j] = strlen(results[j]) + 1;
