@@ -16,9 +16,9 @@ struct ListItem {
 };
 
 int main(int argc, char *argv[]) {
-    unsigned long numberOfLinesToProcess = 1000;
+    unsigned long numberOfLinesToProcess = 300;
     int numberOfThreads = 1;
-    char verbosity = 1;
+    char verbosity = 2;
 
     for(int i = 1; i < argc; i++) {
         if(strncmp(argv[i], "--lines=", 8) == 0) {
@@ -252,22 +252,6 @@ char* findLongestSubstring(char* a, char* b) {
         free(currentList);
         currentList = nextList;
     }
-//    // Print a visual of the graph. Used for testing / visualization.
-//    // Purely aesthetic, will be removed in performance.
-//    printf(" %s\n", b);
-//    for(int i = 0; i < aLength; i++) {
-//        for(int j = 0; j < bLength; j++) {
-//            if(j == 0) {
-//                printf("X", a[i]);
-//            }
-//            if(set[((i + 1) * bLength) + j + 1] == 1) {
-//                printf("\\");
-//            } else {
-//                printf(" ");
-//            }
-//        }
-//        printf("\n");
-//    }
     free(set);
 
     // Create the longest string found.

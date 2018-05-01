@@ -1,5 +1,5 @@
 #define _GNU_SOURCE
-#include <pthread.h>
+#include <omp.h>
 #include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,7 +7,7 @@
 #include <time.h>
 
 char* findLongestSubstring(char* a, char* b);
-void* threadRun(void* arg);
+void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results);
 
 // Simple linked list structure holding i and j index components.
 struct ListItem {
@@ -106,53 +106,12 @@ int main(int argc, char *argv[]) {
     }
 
     // Compare all of the substrings. Begin thread section.
-    pthread_t threads[numberOfThreads];
-    pthread_attr_t attr;
+    omp_set_num_threads(numberOfThreads);
 
-    /* Initialize and set thread detached attribute */
-    pthread_attr_init(&attr);
-    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-
-    //int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results
-    void *arg = malloc(sizeof(int) + sizeof(int) + sizeof(unsigned long) + sizeof(char**) + sizeof(char**));
-    unsigned offset = sizeof(int);
-    memcpy(arg + offset, &numberOfThreads, sizeof(int));
-    offset += sizeof(int);
-    memcpy(arg + offset, &lineNumber, sizeof(unsigned long));
-    offset += sizeof(unsigned long);
-    memcpy(arg + offset, &fileData, sizeof(char**));
-    offset += sizeof(char**);
-    memcpy(arg + offset, &results, sizeof(char**));
-    offset += sizeof(char**);
-
-    void *threadArgs[numberOfThreads];
-    for (int rc, i = 0; i < numberOfThreads; i++) {
-        threadArgs[i] = malloc(offset);
-        memcpy(threadArgs[i], arg, offset);
-        memcpy(threadArgs[i], &i, sizeof(int));
-        //memcpy(arg, &i, sizeof(int));
-//        printf("Creating thread %d\n", *((int*)threadArgs[i]));
-        rc = pthread_create(&threads[i], &attr, threadRun, threadArgs[i]);
-        if (rc) {
-            printf("Error! Return code from pthread_create() is %d\n", rc);
-            return -1;
-        }
+#pragma omp parallel
+    {
+        threadRun(omp_get_thread_num(), numberOfThreads, lineNumber, fileData, results);
     }
-
-//    printf("Main thread before.\n");
-    pthread_attr_destroy(&attr);
-//    printf("Main thread after.\n");
-    void *status;
-    for(int rc, i = 0; i < numberOfThreads; i++) {
-        rc = pthread_join(threads[i], &status);
-        free(threadArgs[i]);
-//        printf("Main thread joined.\n");
-        if (rc) {
-            printf("Error! Return code from pthread_join() is %d\n", rc);
-            return -1;
-        }
-    }
-//    printf("Main thread finished.\n");
 
     if(verbosity != 0) {
         // End thread section. Print the results.
@@ -170,31 +129,9 @@ int main(int argc, char *argv[]) {
     free(fileData[lineNumber]);
     free(results);
     free(fileData);
-
-    pthread_exit(NULL);
 }
 
-//int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results
-void* threadRun(void *arg) {
-    int threadNumber;
-    int numberOfThreads;
-    unsigned long numberOfLines;
-    char** fileData;
-    char** results;
-
-    unsigned offset = 0;
-    memcpy(&threadNumber, arg + offset, sizeof(int));
-    offset += sizeof(int);
-    memcpy(&numberOfThreads, arg + offset, sizeof(int));
-    offset += sizeof(int);
-    memcpy(&numberOfLines, arg + offset, sizeof(unsigned long));
-    offset += sizeof(unsigned long);
-    memcpy(&fileData, arg + offset, sizeof(char**));
-    offset += sizeof(char**);
-    memcpy(&results, arg + offset, sizeof(char**));
-
-//    printf("Thread %d starting.\n", threadNumber);
-
+void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results) {
     // Determine our quota.
     unsigned long quota = numberOfLines / numberOfThreads;
     if(quota * numberOfThreads < numberOfLines) {
@@ -233,8 +170,6 @@ void* threadRun(void *arg) {
         results[i + firstLine] = localResults[i];
     }
     free(localResults);
-//    printf("Thread %d finished.\n", threadNumber);
-    pthread_exit(NULL);
 }
 
 // Returns the longest common string between a and b. Be sure to free the returned char* when done.
@@ -304,7 +239,7 @@ char* findLongestSubstring(char* a, char* b) {
         unsigned long it = i;
         unsigned long jt = j;
         while (set[((it + 1) * bLength) + jt + 1] == 1) {
-            set[((it + 1) * bLength) + jt + 1] = 0;
+            //set[((it + 1) * bLength) + jt + 1] = 0;
             // Optimization: set a checked value to 0 to prevent sub-checks of sub-substrings.
             // EG - If we have "always true" as the longest string, without this optimization, we will end up
             // checking "lways true" as the longest string next row. Set to 0 to prevent sub-checks.

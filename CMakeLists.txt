@@ -10,9 +10,9 @@ include_directories(3way-mpi
 add_executable(OS_Project4
 #        longestCommonSubstringSingle.c
 #        readInFile.c
-#        singleThread.c
+        singleThread.c
 #        3way-openmp/openmp.c
 #        3way-mpi/dwarves/mpi.c
-         3way-pthread/dwarves/pthread.c
+#         3way-pthread/dwarves/pthread.c
         )
 

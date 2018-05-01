@@ -1,0 +1,590 @@
+100%	1871584 Kb	20179.85 sec	1 nodes	1 cores	1000000 lines	dwarves
+99%	954704 Kb	10953.42 sec	1 nodes	1 cores	500000 lines	dwarves
+99%	218652 Kb	2021.39 sec	1 nodes	1 cores	100000 lines	dwarves
+99%	52304 Kb	198.11 sec	1 nodes	1 cores	10000 lines	dwarves
+99%	17700 Kb	18.51 sec	1 nodes	1 cores	1000 lines	dwarves
+192%	1885100 Kb	14695.07 sec	1 nodes	2 cores	1000000 lines	dwarves
+33%	898696 Kb	4.39 sec	1 nodes	2 cores	500000 lines	dwarves
+101%	180972 Kb	0.26 sec	1 nodes	2 cores	100000 lines	dwarves
+194%	64732 Kb	123.38 sec	1 nodes	2 cores	10000 lines	dwarves
+189%	28820 Kb	12.41 sec	1 nodes	2 cores	1000 lines	dwarves
+206%	11944 Kb	0.02 sec	1 nodes	4 cores	1000 lines	dwarves
+19%	25184 Kb	0.36 sec	1 nodes	8 cores	1000 lines	dwarves
+1159%	174924 Kb	3.97 sec	1 nodes	16 cores	1000 lines	dwarves
+869%	81028 Kb	0.10 sec	1 nodes	32 cores	1000 lines	dwarves
+327%	98376 Kb	7.38 sec	2 nodes	4 cores	1000 lines	dwarves
+345%	183016 Kb	6.40 sec	4 nodes	4 cores	1000 lines	dwarves
+117%	19820 Kb	0.06 sec	4 nodes	2 cores	1000 lines	dwarves
+986%	373172 Kb	3.35 sec	2 nodes	16 cores	1000 lines	dwarves
+164%	70228 Kb	0.08 sec	16 nodes	2 cores	1000 lines	dwarves
+349%	91004 Kb	82.69 sec	1 nodes	4 cores	10000 lines	dwarves
+512%	133264 Kb	72.57 sec	1 nodes	8 cores	10000 lines	dwarves
+362%	65472 Kb	0.10 sec	1 nodes	16 cores	10000 lines	dwarves
+1200%	247820 Kb	0.56 sec	1 nodes	32 cores	10000 lines	dwarves
+374%	139724 Kb	67.07 sec	2 nodes	4 cores	10000 lines	dwarves
+129%	52968 Kb	0.08 sec	4 nodes	4 cores	10000 lines	dwarves
+198%	141852 Kb	110.01 sec	4 nodes	2 cores	10000 lines	dwarves
+326%	153020 Kb	0.13 sec	2 nodes	16 cores	10000 lines	dwarves
+143%	129092 Kb	0.24 sec	16 nodes	2 cores	10000 lines	dwarves
+106%	183688 Kb	0.28 sec	1 nodes	4 cores	100000 lines	dwarves
+129%	195928 Kb	0.20 sec	1 nodes	8 cores	100000 lines	dwarves
+176%	225080 Kb	0.22 sec	1 nodes	16 cores	100000 lines	dwarves
+317%	290260 Kb	0.37 sec	1 nodes	32 cores	100000 lines	dwarves
+121%	201004 Kb	0.31 sec	2 nodes	4 cores	100000 lines	dwarves
+123%	207232 Kb	0.27 sec	4 nodes	4 cores	100000 lines	dwarves
+109%	195888 Kb	0.21 sec	4 nodes	2 cores	100000 lines	dwarves
+51%	275372 Kb	1.08 sec	2 nodes	16 cores	100000 lines	dwarves
+116%	278692 Kb	0.35 sec	16 nodes	2 cores	100000 lines	dwarves
+slurmstepd: error: *** JOB 819877 ON dwarf32 CANCELLED AT 2018-04-30T02:25:35 DUE TO TIME LIMIT ***
+107%	914764 Kb	0.95 sec	1 nodes	8 cores	500000 lines	dwarves
+129%	945008 Kb	1.03 sec	1 nodes	16 cores	500000 lines	dwarves
+275%	1095864 Kb	1.23 sec	1 nodes	32 cores	500000 lines	dwarves
+107%	916060 Kb	0.97 sec	2 nodes	4 cores	500000 lines	dwarves
+107%	936448 Kb	0.80 sec	4 nodes	4 cores	500000 lines	dwarves
+96%	906496 Kb	1.14 sec	4 nodes	2 cores	500000 lines	dwarves
+259%	1154556 Kb	1.25 sec	2 nodes	16 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 819888 ON dwarf26 CANCELLED AT 2018-04-30T02:29:41 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 819889 ON dwarf01 CANCELLED AT 2018-04-30T02:23:35 DUE TO TIME LIMIT ***
+214%	1914400 Kb	2.02 sec	1 nodes	16 cores	1000000 lines	dwarves
+379%	2070012 Kb	2.48 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 819892 ON dwarf13 CANCELLED AT 2018-04-30T02:14:53 DUE TO TIME LIMIT ***
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+99%	1871584 Kb	20477.26 sec	1 nodes	1 cores	1000000 lines	dwarves
+99%	954456 Kb	12557.88 sec	1 nodes	1 cores	500000 lines	dwarves
+99%	218652 Kb	1966.02 sec	1 nodes	1 cores	100000 lines	dwarves
+99%	52500 Kb	188.98 sec	1 nodes	1 cores	10000 lines	dwarves
+99%	17812 Kb	20.91 sec	1 nodes	1 cores	1000 lines	dwarves
+191%	1884452 Kb	14842.40 sec	1 nodes	2 cores	1000000 lines	dwarves
+194%	964880 Kb	7089.50 sec	1 nodes	2 cores	500000 lines	dwarves
+21%	181168 Kb	0.96 sec	1 nodes	2 cores	100000 lines	dwarves
+195%	64896 Kb	138.09 sec	1 nodes	2 cores	10000 lines	dwarves
+189%	28856 Kb	12.25 sec	1 nodes	2 cores	1000 lines	dwarves
+242%	9308 Kb	0.02 sec	1 nodes	4 cores	1000 lines	dwarves
+431%	25688 Kb	0.01 sec	1 nodes	8 cores	1000 lines	dwarves
+506%	45248 Kb	0.06 sec	1 nodes	16 cores	1000 lines	dwarves
+644%	86264 Kb	0.13 sec	1 nodes	32 cores	1000 lines	dwarves
+251%	24340 Kb	0.03 sec	2 nodes	4 cores	1000 lines	dwarves
+155%	69792 Kb	0.15 sec	4 nodes	4 cores	1000 lines	dwarves
+100%	21672 Kb	0.07 sec	4 nodes	2 cores	1000 lines	dwarves
+438%	76064 Kb	0.05 sec	2 nodes	16 cores	1000 lines	dwarves
+161%	66176 Kb	0.08 sec	16 nodes	2 cores	1000 lines	dwarves
+345%	87044 Kb	89.04 sec	1 nodes	4 cores	10000 lines	dwarves
+561%	137484 Kb	68.31 sec	1 nodes	8 cores	10000 lines	dwarves
+421%	56532 Kb	0.08 sec	1 nodes	16 cores	10000 lines	dwarves
+776%	164700 Kb	0.22 sec	1 nodes	32 cores	10000 lines	dwarves
+385%	134800 Kb	65.27 sec	2 nodes	4 cores	10000 lines	dwarves
+364%	250132 Kb	81.67 sec	4 nodes	4 cores	10000 lines	dwarves
+196%	143132 Kb	113.42 sec	4 nodes	2 cores	10000 lines	dwarves
+367%	261852 Kb	0.40 sec	2 nodes	16 cores	10000 lines	dwarves
+151%	236828 Kb	0.64 sec	16 nodes	2 cores	10000 lines	dwarves
+341%	250144 Kb	872.15 sec	1 nodes	4 cores	100000 lines	dwarves
+140%	197212 Kb	0.21 sec	1 nodes	8 cores	100000 lines	dwarves
+179%	237988 Kb	0.38 sec	1 nodes	16 cores	100000 lines	dwarves
+316%	291900 Kb	0.39 sec	1 nodes	32 cores	100000 lines	dwarves
+99%	312564 Kb	1965.01 sec	2 nodes	4 cores	100000 lines	dwarves
+138%	225588 Kb	0.33 sec	4 nodes	4 cores	100000 lines	dwarves
+80%	195540 Kb	0.31 sec	4 nodes	2 cores	100000 lines	dwarves
+224%	300260 Kb	0.26 sec	2 nodes	16 cores	100000 lines	dwarves
+105%	232888 Kb	0.36 sec	16 nodes	2 cores	100000 lines	dwarves
+slurmstepd: error: *** JOB 819938 ON dwarf19 CANCELLED AT 2018-04-30T02:29:41 DUE TO TIME LIMIT ***
+90%	912192 Kb	1.04 sec	1 nodes	8 cores	500000 lines	dwarves
+119%	939804 Kb	0.85 sec	1 nodes	16 cores	500000 lines	dwarves
+174%	1019292 Kb	1.10 sec	1 nodes	32 cores	500000 lines	dwarves
+104%	908796 Kb	1.14 sec	2 nodes	4 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 819944 ON dwarf13 CANCELLED AT 2018-04-30T01:55:13 DUE TO TIME LIMIT ***
+116%	984232 Kb	0.74 sec	2 nodes	16 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 819947 ON dwarf19 CANCELLED AT 2018-04-30T02:29:41 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 819948 ON dwarf16 CANCELLED AT 2018-04-30T02:26:35 DUE TO TIME LIMIT ***
+211%	1925512 Kb	2.01 sec	1 nodes	16 cores	1000000 lines	dwarves
+179%	1940732 Kb	1.88 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 819951 ON dwarf32 CANCELLED AT 2018-04-30T02:15:54 DUE TO TIME LIMIT ***
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+99%	1872628 Kb	20287.83 sec	1 nodes	1 cores	1000000 lines	dwarves
+99%	954384 Kb	12628.89 sec	1 nodes	1 cores	500000 lines	dwarves
+99%	218652 Kb	1960.37 sec	1 nodes	1 cores	100000 lines	dwarves
+99%	52500 Kb	228.52 sec	1 nodes	1 cores	10000 lines	dwarves
+99%	17800 Kb	21.27 sec	1 nodes	1 cores	1000 lines	dwarves
+193%	1884324 Kb	13327.39 sec	1 nodes	2 cores	1000000 lines	dwarves
+192%	967020 Kb	7024.42 sec	1 nodes	2 cores	500000 lines	dwarves
+100%	180972 Kb	0.28 sec	1 nodes	2 cores	100000 lines	dwarves
+195%	64732 Kb	131.93 sec	1 nodes	2 cores	10000 lines	dwarves
+190%	28724 Kb	14.59 sec	1 nodes	2 cores	1000 lines	dwarves
+131%	9920 Kb	0.04 sec	1 nodes	4 cores	1000 lines	dwarves
+406%	29604 Kb	0.03 sec	1 nodes	8 cores	1000 lines	dwarves
+1293%	179360 Kb	2.88 sec	1 nodes	16 cores	1000 lines	dwarves
+767%	78336 Kb	0.10 sec	1 nodes	32 cores	1000 lines	dwarves
+289%	102764 Kb	7.85 sec	2 nodes	4 cores	1000 lines	dwarves
+346%	178560 Kb	5.91 sec	4 nodes	4 cores	1000 lines	dwarves
+148%	20516 Kb	0.02 sec	4 nodes	2 cores	1000 lines	dwarves
+985%	375292 Kb	3.69 sec	2 nodes	16 cores	1000 lines	dwarves
+189%	367520 Kb	10.62 sec	16 nodes	2 cores	1000 lines	dwarves
+353%	89428 Kb	73.09 sec	1 nodes	4 cores	10000 lines	dwarves
+646%	137596 Kb	54.95 sec	1 nodes	8 cores	10000 lines	dwarves
+1256%	231940 Kb	42.36 sec	1 nodes	16 cores	10000 lines	dwarves
+976%	253860 Kb	0.51 sec	1 nodes	32 cores	10000 lines	dwarves
+339%	134880 Kb	76.88 sec	2 nodes	4 cores	10000 lines	dwarves
+389%	248756 Kb	59.56 sec	4 nodes	4 cores	10000 lines	dwarves
+199%	137892 Kb	104.79 sec	4 nodes	2 cores	10000 lines	dwarves
+350%	260868 Kb	0.53 sec	2 nodes	16 cores	10000 lines	dwarves
+148%	274992 Kb	0.92 sec	16 nodes	2 cores	10000 lines	dwarves
+108%	183716 Kb	0.29 sec	1 nodes	4 cores	100000 lines	dwarves
+139%	196440 Kb	0.21 sec	1 nodes	8 cores	100000 lines	dwarves
+183%	227420 Kb	0.35 sec	1 nodes	16 cores	100000 lines	dwarves
+343%	293600 Kb	0.35 sec	1 nodes	32 cores	100000 lines	dwarves
+124%	195860 Kb	0.30 sec	2 nodes	4 cores	100000 lines	dwarves
+120%	217444 Kb	0.21 sec	4 nodes	4 cores	100000 lines	dwarves
+101%	197216 Kb	0.22 sec	4 nodes	2 cores	100000 lines	dwarves
+181%	276600 Kb	0.23 sec	2 nodes	16 cores	100000 lines	dwarves
+120%	276512 Kb	0.35 sec	16 nodes	2 cores	100000 lines	dwarves
+slurmstepd: error: *** JOB 819994 ON dwarf20 CANCELLED AT 2018-04-30T02:29:41 DUE TO TIME LIMIT ***
+106%	912212 Kb	1.04 sec	1 nodes	8 cores	500000 lines	dwarves
+1130%	1135320 Kb	2165.02 sec	1 nodes	16 cores	500000 lines	dwarves
+516%	1148676 Kb	1.57 sec	1 nodes	32 cores	500000 lines	dwarves
+347%	1035548 Kb	3487.88 sec	2 nodes	4 cores	500000 lines	dwarves
+108%	934308 Kb	0.88 sec	4 nodes	4 cores	500000 lines	dwarves
+slurmstepd: error: *** JOB 820000 ON dwarf48 CANCELLED AT 2018-04-30T01:55:13 DUE TO TIME LIMIT ***
+71%	1154304 Kb	4.79 sec	2 nodes	16 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820003 ON dwarf48 CANCELLED AT 2018-04-30T02:29:41 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 820004 ON dwarf19 CANCELLED AT 2018-04-30T02:27:40 DUE TO TIME LIMIT ***
+193%	1926136 Kb	1.91 sec	1 nodes	16 cores	1000000 lines	dwarves
+210%	1964760 Kb	1.97 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 820007 ON dwarf13 CANCELLED AT 2018-04-30T02:15:55 DUE TO TIME LIMIT ***
+slurmstepd: error: Exceeded job memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+99%	1872280 Kb	20376.47 sec	1 nodes	1 cores	1000000 lines	dwarves
+99%	955676 Kb	10407.13 sec	1 nodes	1 cores	500000 lines	dwarves
+99%	218652 Kb	2344.36 sec	1 nodes	1 cores	100000 lines	dwarves
+99%	52500 Kb	183.71 sec	1 nodes	1 cores	10000 lines	dwarves
+99%	17800 Kb	21.48 sec	1 nodes	1 cores	1000 lines	dwarves
+193%	1885380 Kb	16579.01 sec	1 nodes	2 cores	1000000 lines	dwarves
+194%	965996 Kb	7223.13 sec	1 nodes	2 cores	500000 lines	dwarves
+97%	180972 Kb	0.29 sec	1 nodes	2 cores	100000 lines	dwarves
+194%	64800 Kb	134.39 sec	1 nodes	2 cores	10000 lines	dwarves
+189%	27856 Kb	14.32 sec	1 nodes	2 cores	1000 lines	dwarves
+93%	9456 Kb	0.04 sec	1 nodes	4 cores	1000 lines	dwarves
+391%	28820 Kb	0.04 sec	1 nodes	8 cores	1000 lines	dwarves
+540%	65948 Kb	0.10 sec	1 nodes	16 cores	1000 lines	dwarves
+1981%	361680 Kb	2.64 sec	1 nodes	32 cores	1000 lines	dwarves
+357%	100912 Kb	6.32 sec	2 nodes	4 cores	1000 lines	dwarves
+240%	66488 Kb	0.09 sec	4 nodes	4 cores	1000 lines	dwarves
+197%	102608 Kb	10.54 sec	4 nodes	2 cores	1000 lines	dwarves
+753%	381212 Kb	3.15 sec	2 nodes	16 cores	1000 lines	dwarves
+188%	371572 Kb	10.65 sec	16 nodes	2 cores	1000 lines	dwarves
+349%	86124 Kb	93.60 sec	1 nodes	4 cores	10000 lines	dwarves
+541%	136792 Kb	71.51 sec	1 nodes	8 cores	10000 lines	dwarves
+1301%	237032 Kb	27.81 sec	1 nodes	16 cores	10000 lines	dwarves
+637%	227092 Kb	0.46 sec	1 nodes	32 cores	10000 lines	dwarves
+367%	141740 Kb	66.30 sec	2 nodes	4 cores	10000 lines	dwarves
+380%	261076 Kb	64.65 sec	4 nodes	4 cores	10000 lines	dwarves
+198%	143588 Kb	114.24 sec	4 nodes	2 cores	10000 lines	dwarves
+547%	259200 Kb	0.50 sec	2 nodes	16 cores	10000 lines	dwarves
+155%	223204 Kb	0.51 sec	16 nodes	2 cores	10000 lines	dwarves
+95%	186464 Kb	0.26 sec	1 nodes	4 cores	100000 lines	dwarves
+145%	205456 Kb	0.22 sec	1 nodes	8 cores	100000 lines	dwarves
+181%	226612 Kb	0.34 sec	1 nodes	16 cores	100000 lines	dwarves
+343%	285624 Kb	0.33 sec	1 nodes	32 cores	100000 lines	dwarves
+105%	194724 Kb	0.22 sec	2 nodes	4 cores	100000 lines	dwarves
+369%	419848 Kb	738.95 sec	4 nodes	4 cores	100000 lines	dwarves
+104%	198260 Kb	0.22 sec	4 nodes	2 cores	100000 lines	dwarves
+1079%	614116 Kb	275.53 sec	2 nodes	16 cores	100000 lines	dwarves
+123%	233176 Kb	0.31 sec	16 nodes	2 cores	100000 lines	dwarves
+slurmstepd: error: *** JOB 820051 ON dwarf55 CANCELLED AT 2018-04-30T02:29:41 DUE TO TIME LIMIT ***
+106%	916768 Kb	0.86 sec	1 nodes	8 cores	500000 lines	dwarves
+1080%	1140708 Kb	1898.74 sec	1 nodes	16 cores	500000 lines	dwarves
+2277%	1342148 Kb	1133.38 sec	1 nodes	32 cores	500000 lines	dwarves
+slurmstepd: error: *** JOB 820055 ON dwarf56 CANCELLED AT 2018-04-30T02:15:55 DUE TO TIME LIMIT ***
+110%	938096 Kb	1.10 sec	4 nodes	4 cores	500000 lines	dwarves
+85%	905096 Kb	1.03 sec	4 nodes	2 cores	500000 lines	dwarves
+175%	1118772 Kb	1.04 sec	2 nodes	16 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820060 ON dwarf58 CANCELLED AT 2018-04-30T02:29:41 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 820061 ON dwarf12 CANCELLED AT 2018-04-30T02:28:40 DUE TO TIME LIMIT ***
+162%	1922368 Kb	2.01 sec	1 nodes	16 cores	1000000 lines	dwarves
+245%	2002288 Kb	2.08 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 820064 ON dwarf56 CANCELLED AT 2018-04-30T02:15:55 DUE TO TIME LIMIT ***
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+99%	1872896 Kb	20389.48 sec	1 nodes	1 cores	1000000 lines	dwarves
+99%	954916 Kb	10346.10 sec	1 nodes	1 cores	500000 lines	dwarves
+99%	218652 Kb	1906.00 sec	1 nodes	1 cores	100000 lines	dwarves
+99%	52500 Kb	234.45 sec	1 nodes	1 cores	10000 lines	dwarves
+99%	17800 Kb	21.67 sec	1 nodes	1 cores	1000 lines	dwarves
+193%	1885336 Kb	14520.18 sec	1 nodes	2 cores	1000000 lines	dwarves
+99%	898972 Kb	0.83 sec	1 nodes	2 cores	500000 lines	dwarves
+94%	181404 Kb	0.20 sec	1 nodes	2 cores	100000 lines	dwarves
+195%	64732 Kb	131.38 sec	1 nodes	2 cores	10000 lines	dwarves
+190%	28728 Kb	13.25 sec	1 nodes	2 cores	1000 lines	dwarves
+70%	9044 Kb	0.04 sec	1 nodes	4 cores	1000 lines	dwarves
+493%	29140 Kb	0.02 sec	1 nodes	8 cores	1000 lines	dwarves
+1023%	184308 Kb	3.24 sec	1 nodes	16 cores	1000 lines	dwarves
+1678%	360244 Kb	3.22 sec	1 nodes	32 cores	1000 lines	dwarves
+161%	22532 Kb	0.05 sec	2 nodes	4 cores	1000 lines	dwarves
+200%	61468 Kb	0.13 sec	4 nodes	4 cores	1000 lines	dwarves
+127%	25532 Kb	0.06 sec	4 nodes	2 cores	1000 lines	dwarves
+908%	378560 Kb	3.11 sec	2 nodes	16 cores	1000 lines	dwarves
+189%	371572 Kb	10.62 sec	16 nodes	2 cores	1000 lines	dwarves
+324%	90112 Kb	104.03 sec	1 nodes	4 cores	10000 lines	dwarves
+672%	135476 Kb	44.94 sec	1 nodes	8 cores	10000 lines	dwarves
+1299%	237936 Kb	27.48 sec	1 nodes	16 cores	10000 lines	dwarves
+1175%	253804 Kb	0.56 sec	1 nodes	32 cores	10000 lines	dwarves
+361%	141000 Kb	70.47 sec	2 nodes	4 cores	10000 lines	dwarves
+391%	243348 Kb	60.55 sec	4 nodes	4 cores	10000 lines	dwarves
+199%	140000 Kb	118.14 sec	4 nodes	2 cores	10000 lines	dwarves
+370%	144108 Kb	0.11 sec	2 nodes	16 cores	10000 lines	dwarves
+159%	144148 Kb	0.22 sec	16 nodes	2 cores	10000 lines	dwarves
+317%	251192 Kb	911.38 sec	1 nodes	4 cores	100000 lines	dwarves
+132%	195564 Kb	0.21 sec	1 nodes	8 cores	100000 lines	dwarves
+200%	229148 Kb	0.32 sec	1 nodes	16 cores	100000 lines	dwarves
+359%	309108 Kb	0.49 sec	1 nodes	32 cores	100000 lines	dwarves
+115%	200408 Kb	0.22 sec	2 nodes	4 cores	100000 lines	dwarves
+128%	228448 Kb	0.35 sec	4 nodes	4 cores	100000 lines	dwarves
+96%	198548 Kb	0.28 sec	4 nodes	2 cores	100000 lines	dwarves
+204%	280356 Kb	0.36 sec	2 nodes	16 cores	100000 lines	dwarves
+125%	278364 Kb	0.36 sec	16 nodes	2 cores	100000 lines	dwarves
+slurmstepd: error: *** JOB 820106 ON dwarf60 CANCELLED AT 2018-04-30T02:29:41 DUE TO TIME LIMIT ***
+108%	914272 Kb	0.88 sec	1 nodes	8 cores	500000 lines	dwarves
+120%	945416 Kb	0.87 sec	1 nodes	16 cores	500000 lines	dwarves
+2462%	1337856 Kb	1071.92 sec	1 nodes	32 cores	500000 lines	dwarves
+99%	911468 Kb	0.89 sec	2 nodes	4 cores	500000 lines	dwarves
+102%	934680 Kb	1.13 sec	4 nodes	4 cores	500000 lines	dwarves
+98%	905340 Kb	1.08 sec	4 nodes	2 cores	500000 lines	dwarves
+1264%	1344952 Kb	1474.73 sec	2 nodes	16 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820116 ON dwarf21 CANCELLED AT 2018-04-30T02:34:44 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 820117 ON dwarf60 CANCELLED AT 2018-04-30T02:28:40 DUE TO TIME LIMIT ***
+195%	1915344 Kb	1.97 sec	1 nodes	16 cores	1000000 lines	dwarves
+81%	2048140 Kb	11.80 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 820120 ON dwarf01 CANCELLED AT 2018-04-30T02:16:55 DUE TO TIME LIMIT ***
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+112%	1891704 Kb	1.55 sec	2 nodes	16 cores	1000000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+99%	1871584 Kb	19357.96 sec	1 nodes	1 cores	1000000 lines	dwarves
+99%	954088 Kb	10555.45 sec	1 nodes	1 cores	500000 lines	dwarves
+99%	218652 Kb	2413.88 sec	1 nodes	1 cores	100000 lines	dwarves
+99%	52500 Kb	183.63 sec	1 nodes	1 cores	10000 lines	dwarves
+99%	17884 Kb	16.99 sec	1 nodes	1 cores	1000 lines	dwarves
+194%	1885284 Kb	15881.48 sec	1 nodes	2 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 820131 ON dwarf55 CANCELLED AT 2018-04-30T04:04:36 DUE TO TIME LIMIT ***
+92%	180972 Kb	0.27 sec	1 nodes	2 cores	100000 lines	dwarves
+196%	64896 Kb	120.50 sec	1 nodes	2 cores	10000 lines	dwarves
+190%	28820 Kb	12.50 sec	1 nodes	2 cores	1000 lines	dwarves
+158%	13764 Kb	0.03 sec	1 nodes	4 cores	1000 lines	dwarves
+486%	24080 Kb	0.03 sec	1 nodes	8 cores	1000 lines	dwarves
+533%	42332 Kb	0.06 sec	1 nodes	16 cores	1000 lines	dwarves
+1911%	365336 Kb	2.83 sec	1 nodes	32 cores	1000 lines	dwarves
+380%	100776 Kb	6.78 sec	2 nodes	4 cores	1000 lines	dwarves
+337%	182744 Kb	6.33 sec	4 nodes	4 cores	1000 lines	dwarves
+196%	100392 Kb	12.77 sec	4 nodes	2 cores	1000 lines	dwarves
+990%	383124 Kb	3.03 sec	2 nodes	16 cores	1000 lines	dwarves
+189%	368404 Kb	10.60 sec	16 nodes	2 cores	1000 lines	dwarves
+349%	91004 Kb	79.11 sec	1 nodes	4 cores	10000 lines	dwarves
+671%	136084 Kb	49.14 sec	1 nodes	8 cores	10000 lines	dwarves
+1216%	233384 Kb	42.11 sec	1 nodes	16 cores	10000 lines	dwarves
+633%	154748 Kb	0.24 sec	1 nodes	32 cores	10000 lines	dwarves
+369%	141592 Kb	68.19 sec	2 nodes	4 cores	10000 lines	dwarves
+390%	237328 Kb	59.29 sec	4 nodes	4 cores	10000 lines	dwarves
+197%	141520 Kb	135.60 sec	4 nodes	2 cores	10000 lines	dwarves
+483%	255932 Kb	0.36 sec	2 nodes	16 cores	10000 lines	dwarves
+148%	221028 Kb	0.55 sec	16 nodes	2 cores	10000 lines	dwarves
+101%	186448 Kb	0.27 sec	1 nodes	4 cores	100000 lines	dwarves
+134%	198332 Kb	0.31 sec	1 nodes	8 cores	100000 lines	dwarves
+1115%	403424 Kb	435.09 sec	1 nodes	16 cores	100000 lines	dwarves
+145%	295208 Kb	0.94 sec	1 nodes	32 cores	100000 lines	dwarves
+116%	198172 Kb	0.32 sec	2 nodes	4 cores	100000 lines	dwarves
+123%	233696 Kb	0.24 sec	4 nodes	4 cores	100000 lines	dwarves
+174%	305824 Kb	1667.33 sec	4 nodes	2 cores	100000 lines	dwarves
+175%	274988 Kb	0.24 sec	2 nodes	16 cores	100000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820162 ON dwarf55 CANCELLED AT 2018-04-30T02:36:45 DUE TO TIME LIMIT ***
+105%	917504 Kb	0.99 sec	1 nodes	8 cores	500000 lines	dwarves
+128%	939312 Kb	0.96 sec	1 nodes	16 cores	500000 lines	dwarves
+2317%	1334324 Kb	1124.43 sec	1 nodes	32 cores	500000 lines	dwarves
+100%	907396 Kb	1.13 sec	2 nodes	4 cores	500000 lines	dwarves
+107%	941640 Kb	0.77 sec	4 nodes	4 cores	500000 lines	dwarves
+slurmstepd: error: *** JOB 820168 ON dwarf55 CANCELLED AT 2018-04-30T02:00:19 DUE TO TIME LIMIT ***
+1250%	1343728 Kb	1302.80 sec	2 nodes	16 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820171 ON dwarf55 CANCELLED AT 2018-04-30T02:36:45 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 820172 ON dwarf58 CANCELLED AT 2018-04-30T02:31:42 DUE TO TIME LIMIT ***
+112%	1830216 Kb	1.87 sec	1 nodes	16 cores	1000000 lines	dwarves
+44%	1905780 Kb	10.38 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded job memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+99%	1871760 Kb	18955.44 sec	1 nodes	1 cores	1000000 lines	dwarves
+99%	955824 Kb	10191.82 sec	1 nodes	1 cores	500000 lines	dwarves
+99%	218652 Kb	2323.61 sec	1 nodes	1 cores	100000 lines	dwarves
+99%	52500 Kb	185.89 sec	1 nodes	1 cores	10000 lines	dwarves
+99%	17680 Kb	17.22 sec	1 nodes	1 cores	1000 lines	dwarves
+194%	1884584 Kb	13912.36 sec	1 nodes	2 cores	1000000 lines	dwarves
+99%	898848 Kb	0.88 sec	1 nodes	2 cores	500000 lines	dwarves
+91%	180972 Kb	0.30 sec	1 nodes	2 cores	100000 lines	dwarves
+195%	64800 Kb	114.58 sec	1 nodes	2 cores	10000 lines	dwarves
+151%	28736 Kb	17.62 sec	1 nodes	2 cores	1000 lines	dwarves
+202%	14212 Kb	0.03 sec	1 nodes	4 cores	1000 lines	dwarves
+263%	29200 Kb	0.03 sec	1 nodes	8 cores	1000 lines	dwarves
+1134%	178616 Kb	4.37 sec	1 nodes	16 cores	1000 lines	dwarves
+759%	83356 Kb	0.11 sec	1 nodes	32 cores	1000 lines	dwarves
+118%	20092 Kb	0.03 sec	2 nodes	4 cores	1000 lines	dwarves
+331%	185916 Kb	6.47 sec	4 nodes	4 cores	1000 lines	dwarves
+195%	101044 Kb	10.89 sec	4 nodes	2 cores	1000 lines	dwarves
+886%	373440 Kb	2.65 sec	2 nodes	16 cores	1000 lines	dwarves
+190%	370524 Kb	11.05 sec	16 nodes	2 cores	1000 lines	dwarves
+336%	87852 Kb	116.51 sec	1 nodes	4 cores	10000 lines	dwarves
+646%	134648 Kb	55.12 sec	1 nodes	8 cores	10000 lines	dwarves
+1106%	229320 Kb	46.49 sec	1 nodes	16 cores	10000 lines	dwarves
+1239%	249984 Kb	0.55 sec	1 nodes	32 cores	10000 lines	dwarves
+382%	138472 Kb	68.80 sec	2 nodes	4 cores	10000 lines	dwarves
+386%	255472 Kb	63.68 sec	4 nodes	4 cores	10000 lines	dwarves
+198%	141072 Kb	113.03 sec	4 nodes	2 cores	10000 lines	dwarves
+356%	142304 Kb	0.11 sec	2 nodes	16 cores	10000 lines	dwarves
+158%	148668 Kb	0.23 sec	16 nodes	2 cores	10000 lines	dwarves
+116%	190464 Kb	0.28 sec	1 nodes	4 cores	100000 lines	dwarves
+124%	196604 Kb	0.19 sec	1 nodes	8 cores	100000 lines	dwarves
+160%	223112 Kb	0.28 sec	1 nodes	16 cores	100000 lines	dwarves
+2476%	602000 Kb	215.24 sec	1 nodes	32 cores	100000 lines	dwarves
+122%	202440 Kb	0.33 sec	2 nodes	4 cores	100000 lines	dwarves
+117%	229320 Kb	0.25 sec	4 nodes	4 cores	100000 lines	dwarves
+100%	195756 Kb	0.22 sec	4 nodes	2 cores	100000 lines	dwarves
+1158%	608500 Kb	253.17 sec	2 nodes	16 cores	100000 lines	dwarves
+126%	278264 Kb	0.33 sec	16 nodes	2 cores	100000 lines	dwarves
+slurmstepd: error: *** JOB 820217 ON dwarf35 CANCELLED AT 2018-04-30T02:36:45 DUE TO TIME LIMIT ***
+635%	1046884 Kb	2735.60 sec	1 nodes	8 cores	500000 lines	dwarves
+980%	1147200 Kb	1528.08 sec	1 nodes	16 cores	500000 lines	dwarves
+2614%	1336428 Kb	1016.84 sec	1 nodes	32 cores	500000 lines	dwarves
+348%	1037364 Kb	3490.54 sec	2 nodes	4 cores	500000 lines	dwarves
+107%	948876 Kb	0.88 sec	4 nodes	4 cores	500000 lines	dwarves
+slurmstepd: error: *** JOB 820223 ON dwarf43 CANCELLED AT 2018-04-30T02:02:51 DUE TO TIME LIMIT ***
+1198%	1336556 Kb	1180.72 sec	2 nodes	16 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820226 ON dwarf12 CANCELLED AT 2018-04-30T02:37:45 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 820227 ON dwarf21 CANCELLED AT 2018-04-30T02:33:45 DUE TO TIME LIMIT ***
+226%	1922648 Kb	2.03 sec	1 nodes	16 cores	1000000 lines	dwarves
+164%	1918172 Kb	1.95 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 820230 ON dwarf32 CANCELLED AT 2018-04-30T02:17:57 DUE TO TIME LIMIT ***
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+99%	1872912 Kb	20280.05 sec	1 nodes	1 cores	1000000 lines	dwarves
+99%	955904 Kb	12333.87 sec	1 nodes	1 cores	500000 lines	dwarves
+99%	218656 Kb	1653.59 sec	1 nodes	1 cores	100000 lines	dwarves
+99%	52584 Kb	185.58 sec	1 nodes	1 cores	10000 lines	dwarves
+99%	17704 Kb	16.97 sec	1 nodes	1 cores	1000 lines	dwarves
+slurmstepd: error: *** JOB 820240 ON dwarf52 CANCELLED AT 2018-04-30T06:40:29 DUE TO TIME LIMIT ***
+189%	967812 Kb	8557.76 sec	1 nodes	2 cores	500000 lines	dwarves
+97%	182828 Kb	0.24 sec	1 nodes	2 cores	100000 lines	dwarves
+194%	64732 Kb	125.15 sec	1 nodes	2 cores	10000 lines	dwarves
+188%	27920 Kb	11.80 sec	1 nodes	2 cores	1000 lines	dwarves
+163%	9960 Kb	0.03 sec	1 nodes	4 cores	1000 lines	dwarves
+536%	23256 Kb	0.03 sec	1 nodes	8 cores	1000 lines	dwarves
+866%	90460 Kb	0.12 sec	1 nodes	16 cores	1000 lines	dwarves
+1880%	362704 Kb	2.82 sec	1 nodes	32 cores	1000 lines	dwarves
+382%	100176 Kb	6.12 sec	2 nodes	4 cores	1000 lines	dwarves
+350%	179148 Kb	6.34 sec	4 nodes	4 cores	1000 lines	dwarves
+193%	100812 Kb	11.09 sec	4 nodes	2 cores	1000 lines	dwarves
+305%	76616 Kb	0.08 sec	2 nodes	16 cores	1000 lines	dwarves
+189%	372892 Kb	10.70 sec	16 nodes	2 cores	1000 lines	dwarves
+348%	86520 Kb	83.99 sec	1 nodes	4 cores	10000 lines	dwarves
+645%	138876 Kb	55.15 sec	1 nodes	8 cores	10000 lines	dwarves
+1297%	234592 Kb	27.53 sec	1 nodes	16 cores	10000 lines	dwarves
+786%	250048 Kb	0.69 sec	1 nodes	32 cores	10000 lines	dwarves
+235%	138516 Kb	94.50 sec	2 nodes	4 cores	10000 lines	dwarves
+386%	247884 Kb	60.15 sec	4 nodes	4 cores	10000 lines	dwarves
+199%	135140 Kb	114.57 sec	4 nodes	2 cores	10000 lines	dwarves
+255%	128776 Kb	0.13 sec	2 nodes	16 cores	10000 lines	dwarves
+151%	262668 Kb	0.89 sec	16 nodes	2 cores	10000 lines	dwarves
+114%	190828 Kb	0.29 sec	1 nodes	4 cores	100000 lines	dwarves
+658%	302716 Kb	463.08 sec	1 nodes	8 cores	100000 lines	dwarves
+162%	219984 Kb	0.34 sec	1 nodes	16 cores	100000 lines	dwarves
+286%	293792 Kb	0.43 sec	1 nodes	32 cores	100000 lines	dwarves
+107%	193560 Kb	0.31 sec	2 nodes	4 cores	100000 lines	dwarves
+125%	220036 Kb	0.23 sec	4 nodes	4 cores	100000 lines	dwarves
+100%	197352 Kb	0.22 sec	4 nodes	2 cores	100000 lines	dwarves
+196%	272024 Kb	0.24 sec	2 nodes	16 cores	100000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820272 ON dwarf29 CANCELLED AT 2018-04-30T02:37:45 DUE TO TIME LIMIT ***
+109%	917284 Kb	1.09 sec	1 nodes	8 cores	500000 lines	dwarves
+959%	1145452 Kb	2532.26 sec	1 nodes	16 cores	500000 lines	dwarves
+2552%	1340544 Kb	1034.34 sec	1 nodes	32 cores	500000 lines	dwarves
+101%	907028 Kb	0.96 sec	2 nodes	4 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820278 ON dwarf01 CANCELLED AT 2018-04-30T02:09:51 DUE TO TIME LIMIT ***
+124%	991744 Kb	0.79 sec	2 nodes	16 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820281 ON dwarf34 CANCELLED AT 2018-04-30T02:37:45 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 820282 ON dwarf18 CANCELLED AT 2018-04-30T02:38:46 DUE TO TIME LIMIT ***
+93%	1829596 Kb	2.29 sec	1 nodes	16 cores	1000000 lines	dwarves
+326%	2050148 Kb	2.37 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 820285 ON dwarf30 CANCELLED AT 2018-04-30T02:19:59 DUE TO TIME LIMIT ***
+slurmstepd: error: Exceeded job memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+113%	1894728 Kb	2.01 sec	2 nodes	16 cores	1000000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+99%	1873068 Kb	20010.67 sec	1 nodes	1 cores	1000000 lines	dwarves
+99%	954492 Kb	10198.41 sec	1 nodes	1 cores	500000 lines	dwarves
+99%	218720 Kb	1973.06 sec	1 nodes	1 cores	100000 lines	dwarves
+99%	52500 Kb	234.77 sec	1 nodes	1 cores	10000 lines	dwarves
+99%	17736 Kb	17.54 sec	1 nodes	1 cores	1000 lines	dwarves
+193%	1904856 Kb	13925.14 sec	1 nodes	2 cores	1000000 lines	dwarves
+192%	964832 Kb	8348.85 sec	1 nodes	2 cores	500000 lines	dwarves
+96%	183136 Kb	0.22 sec	1 nodes	2 cores	100000 lines	dwarves
+194%	64732 Kb	124.74 sec	1 nodes	2 cores	10000 lines	dwarves
+183%	28724 Kb	13.20 sec	1 nodes	2 cores	1000 lines	dwarves
+248%	9316 Kb	0.02 sec	1 nodes	4 cores	1000 lines	dwarves
+351%	25996 Kb	0.03 sec	1 nodes	8 cores	1000 lines	dwarves
+509%	66640 Kb	0.07 sec	1 nodes	16 cores	1000 lines	dwarves
+810%	91828 Kb	0.10 sec	1 nodes	32 cores	1000 lines	dwarves
+176%	16260 Kb	0.02 sec	2 nodes	4 cores	1000 lines	dwarves
+331%	187408 Kb	6.65 sec	4 nodes	4 cores	1000 lines	dwarves
+194%	102096 Kb	11.19 sec	4 nodes	2 cores	1000 lines	dwarves
+1074%	373032 Kb	3.92 sec	2 nodes	16 cores	1000 lines	dwarves
+189%	371024 Kb	10.66 sec	16 nodes	2 cores	1000 lines	dwarves
+345%	87576 Kb	84.68 sec	1 nodes	4 cores	10000 lines	dwarves
+659%	136404 Kb	49.01 sec	1 nodes	8 cores	10000 lines	dwarves
+1288%	238328 Kb	27.24 sec	1 nodes	16 cores	10000 lines	dwarves
+705%	157332 Kb	0.21 sec	1 nodes	32 cores	10000 lines	dwarves
+311%	139124 Kb	92.08 sec	2 nodes	4 cores	10000 lines	dwarves
+389%	255084 Kb	60.37 sec	4 nodes	4 cores	10000 lines	dwarves
+199%	139744 Kb	114.70 sec	4 nodes	2 cores	10000 lines	dwarves
+532%	262288 Kb	0.36 sec	2 nodes	16 cores	10000 lines	dwarves
+154%	149096 Kb	0.23 sec	16 nodes	2 cores	10000 lines	dwarves
+117%	189476 Kb	0.29 sec	1 nodes	4 cores	100000 lines	dwarves
+144%	199316 Kb	0.29 sec	1 nodes	8 cores	100000 lines	dwarves
+1207%	408592 Kb	414.63 sec	1 nodes	16 cores	100000 lines	dwarves
+306%	286596 Kb	0.40 sec	1 nodes	32 cores	100000 lines	dwarves
+117%	195416 Kb	0.23 sec	2 nodes	4 cores	100000 lines	dwarves
+132%	224644 Kb	0.35 sec	4 nodes	4 cores	100000 lines	dwarves
+111%	200060 Kb	0.34 sec	4 nodes	2 cores	100000 lines	dwarves
+1047%	634852 Kb	289.79 sec	2 nodes	16 cores	100000 lines	dwarves
+112%	254496 Kb	0.27 sec	16 nodes	2 cores	100000 lines	dwarves
+slurmstepd: error: *** JOB 820329 ON dwarf13 CANCELLED AT 2018-04-30T02:46:25 DUE TO TIME LIMIT ***
+110%	916344 Kb	1.08 sec	1 nodes	8 cores	500000 lines	dwarves
+125%	951564 Kb	1.07 sec	1 nodes	16 cores	500000 lines	dwarves
+2249%	1335496 Kb	1152.26 sec	1 nodes	32 cores	500000 lines	dwarves
+105%	909108 Kb	1.08 sec	2 nodes	4 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820335 ON dwarf01 CANCELLED AT 2018-04-30T02:14:53 DUE TO TIME LIMIT ***
+1296%	1355528 Kb	1239.60 sec	2 nodes	16 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820338 ON dwarf26 CANCELLED AT 2018-04-30T02:43:50 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 820339 ON dwarf02 CANCELLED AT 2018-04-30T02:42:50 DUE TO TIME LIMIT ***
+109%	1837532 Kb	1.97 sec	1 nodes	16 cores	1000000 lines	dwarves
+453%	2082148 Kb	2.28 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 820342 ON dwarf02 CANCELLED AT 2018-04-30T02:24:35 DUE TO TIME LIMIT ***
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+125%	1932360 Kb	2.07 sec	2 nodes	16 cores	1000000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+99%	1873532 Kb	20312.30 sec	1 nodes	1 cores	1000000 lines	dwarves
+99%	954088 Kb	10441.51 sec	1 nodes	1 cores	500000 lines	dwarves
+99%	218656 Kb	2397.06 sec	1 nodes	1 cores	100000 lines	dwarves
+99%	52500 Kb	189.41 sec	1 nodes	1 cores	10000 lines	dwarves
+99%	17704 Kb	17.42 sec	1 nodes	1 cores	1000 lines	dwarves
+slurmstepd: error: *** JOB 820352 ON dwarf29 CANCELLED AT 2018-04-30T06:44:29 DUE TO TIME LIMIT ***
+192%	966616 Kb	6926.96 sec	1 nodes	2 cores	500000 lines	dwarves
+91%	181404 Kb	0.20 sec	1 nodes	2 cores	100000 lines	dwarves
+194%	64732 Kb	125.55 sec	1 nodes	2 cores	10000 lines	dwarves
+190%	28536 Kb	13.07 sec	1 nodes	2 cores	1000 lines	dwarves
+239%	50932 Kb	10.70 sec	1 nodes	4 cores	1000 lines	dwarves
+232%	25272 Kb	0.07 sec	1 nodes	8 cores	1000 lines	dwarves
+696%	67240 Kb	0.08 sec	1 nodes	16 cores	1000 lines	dwarves
+1890%	361780 Kb	2.75 sec	1 nodes	32 cores	1000 lines	dwarves
+173%	23996 Kb	0.05 sec	2 nodes	4 cores	1000 lines	dwarves
+336%	179584 Kb	6.32 sec	4 nodes	4 cores	1000 lines	dwarves
+118%	99252 Kb	17.84 sec	4 nodes	2 cores	1000 lines	dwarves
+860%	379692 Kb	3.57 sec	2 nodes	16 cores	1000 lines	dwarves
+188%	373324 Kb	11.08 sec	16 nodes	2 cores	1000 lines	dwarves
+349%	86520 Kb	83.07 sec	1 nodes	4 cores	10000 lines	dwarves
+551%	137744 Kb	59.20 sec	1 nodes	8 cores	10000 lines	dwarves
+1028%	240152 Kb	48.78 sec	1 nodes	16 cores	10000 lines	dwarves
+875%	227188 Kb	0.35 sec	1 nodes	32 cores	10000 lines	dwarves
+364%	143440 Kb	66.91 sec	2 nodes	4 cores	10000 lines	dwarves
+386%	238720 Kb	61.39 sec	4 nodes	4 cores	10000 lines	dwarves
+198%	140276 Kb	112.39 sec	4 nodes	2 cores	10000 lines	dwarves
+520%	258868 Kb	0.60 sec	2 nodes	16 cores	10000 lines	dwarves
+149%	259600 Kb	0.84 sec	16 nodes	2 cores	10000 lines	dwarves
+101%	186880 Kb	0.28 sec	1 nodes	4 cores	100000 lines	dwarves
+609%	304376 Kb	513.37 sec	1 nodes	8 cores	100000 lines	dwarves
+170%	227088 Kb	0.36 sec	1 nodes	16 cores	100000 lines	dwarves
+306%	285268 Kb	0.40 sec	1 nodes	32 cores	100000 lines	dwarves
+117%	197084 Kb	0.20 sec	2 nodes	4 cores	100000 lines	dwarves
+122%	227940 Kb	0.25 sec	4 nodes	4 cores	100000 lines	dwarves
+109%	199136 Kb	0.24 sec	4 nodes	2 cores	100000 lines	dwarves
+188%	276500 Kb	0.21 sec	2 nodes	16 cores	100000 lines	dwarves
+124%	287888 Kb	0.31 sec	16 nodes	2 cores	100000 lines	dwarves
+slurmstepd: error: *** JOB 820384 ON dwarf33 CANCELLED AT 2018-04-30T02:45:53 DUE TO TIME LIMIT ***
+115%	927228 Kb	0.90 sec	1 nodes	8 cores	500000 lines	dwarves
+1011%	1135356 Kb	2485.73 sec	1 nodes	16 cores	500000 lines	dwarves
+319%	1144584 Kb	2.33 sec	1 nodes	32 cores	500000 lines	dwarves
+106%	911452 Kb	1.04 sec	2 nodes	4 cores	500000 lines	dwarves
+106%	936912 Kb	0.78 sec	4 nodes	4 cores	500000 lines	dwarves
+slurmstepd: error: *** JOB 820390 ON dwarf01 CANCELLED AT 2018-04-30T02:14:53 DUE TO TIME LIMIT ***
+1112%	1347476 Kb	1485.20 sec	2 nodes	16 cores	500000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: *** JOB 820393 ON dwarf58 CANCELLED AT 2018-04-30T02:45:53 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 820394 ON dwarf40 CANCELLED AT 2018-04-30T02:43:50 DUE TO TIME LIMIT ***
+109%	1828884 Kb	1.66 sec	1 nodes	16 cores	1000000 lines	dwarves
+173%	1926976 Kb	2.06 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 820397 ON dwarf06 CANCELLED AT 2018-04-30T02:25:35 DUE TO TIME LIMIT ***
+slurmstepd: error: Exceeded step memory limit at some point.
+slurmstepd: error: Exceeded step memory limit at some point.
+188%	2059588 Kb	2.56 sec	2 nodes	16 cores	1000000 lines	dwarves
+slurmstepd: error: Exceeded step memory limit at some point.
+99%	1871608 Kb	20099.32 sec	1 nodes	1 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838108 ON dwarf58 CANCELLED AT 2018-04-30T18:02:35 DUE TO TIME LIMIT ***
+596%	1934252 Kb	6980.11 sec	1 nodes	8 cores	1000000 lines	dwarves
+189%	1923948 Kb	1.98 sec	1 nodes	16 cores	1000000 lines	dwarves
+208%	1962084 Kb	2.14 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838112 ON dwarf19 CANCELLED AT 2018-04-30T16:01:41 ***
+106%	1830752 Kb	1.81 sec	4 nodes	4 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838114 ON dwarf12 CANCELLED AT 2018-04-30T16:01:41 ***
+246%	2059628 Kb	2.51 sec	2 nodes	16 cores	1000000 lines	dwarves
+111%	2041640 Kb	4.53 sec	16 nodes	2 cores	1000000 lines	dwarves
+99%	1871608 Kb	20476.21 sec	1 nodes	1 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838118 ON dwarf01 CANCELLED AT 2018-04-30T18:02:35 DUE TO TIME LIMIT ***
+629%	1942716 Kb	5529.42 sec	1 nodes	8 cores	1000000 lines	dwarves
+177%	1925844 Kb	1.95 sec	1 nodes	16 cores	1000000 lines	dwarves
+410%	2087448 Kb	2.48 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838122 ON dwarf19 CANCELLED AT 2018-04-30T16:01:41 ***
+28%	1925852 Kb	16.10 sec	4 nodes	4 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838124 ON dwarf17 CANCELLED AT 2018-04-30T16:01:41 ***
+197%	2057564 Kb	2.10 sec	2 nodes	16 cores	1000000 lines	dwarves
+102%	1880232 Kb	3.43 sec	16 nodes	2 cores	1000000 lines	dwarves
+99%	1873276 Kb	20527.20 sec	1 nodes	1 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838128 ON dwarf02 CANCELLED AT 2018-04-30T18:03:05 DUE TO TIME LIMIT ***
+614%	1950652 Kb	5967.01 sec	1 nodes	8 cores	1000000 lines	dwarves
+108%	1833352 Kb	1.64 sec	1 nodes	16 cores	1000000 lines	dwarves
+94%	2072252 Kb	12.08 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838132 ON dwarf43 CANCELLED AT 2018-04-30T16:01:41 ***
+29%	1922388 Kb	16.14 sec	4 nodes	4 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838134 ON dwarf43 CANCELLED AT 2018-04-30T16:01:41 ***
+124%	1915896 Kb	1.60 sec	2 nodes	16 cores	1000000 lines	dwarves
+104%	1913076 Kb	3.51 sec	16 nodes	2 cores	1000000 lines	dwarves
+99%	1871612 Kb	20263.94 sec	1 nodes	1 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838138 ON dwarf03 CANCELLED AT 2018-04-30T18:03:05 DUE TO TIME LIMIT ***
+620%	1945224 Kb	5990.31 sec	1 nodes	8 cores	1000000 lines	dwarves
+107%	1836276 Kb	1.61 sec	1 nodes	16 cores	1000000 lines	dwarves
+368%	2047072 Kb	2.33 sec	1 nodes	32 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838142 ON dwarf43 CANCELLED AT 2018-04-30T16:01:41 ***
+28%	1924916 Kb	16.19 sec	4 nodes	4 cores	1000000 lines	dwarves
+slurmstepd: error: *** JOB 838144 ON dwarf43 CANCELLED AT 2018-04-30T16:01:41 ***
+141%	1971664 Kb	1.72 sec	2 nodes	16 cores	1000000 lines	dwarves
+106%	1963808 Kb	3.76 sec	16 nodes	2 cores	1000000 lines	dwarves
