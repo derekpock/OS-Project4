@@ -26,6 +26,8 @@ int main(int argc, char *argv[]) {
 
     unsigned long numberOfLinesToProcess = 1000;
     unsigned long localQuota;
+    unsigned long firstLine;
+    unsigned long lastLine;
     char verbosity = 1;
     unsigned long lineNumber = 0;
     char** fileData = NULL;
@@ -137,15 +139,15 @@ int main(int argc, char *argv[]) {
         /// DISPATCH DATA TO THREADS
         for (int i = 1; i < numOfThreads; i++) {
             // Determine next thread's first and last lines.
-            unsigned long firstLine = quota * i;           // First line we need to compare - inclusive.
-            unsigned long lastLine = quota * (i + 1);      // Last line we need to compare - inclusive.
+            firstLine = quota * i;           // First line we need to compare - inclusive.
+            lastLine = quota * (i + 1);      // Last line we need to compare - inclusive.
             if (i == (numOfThreads - 1)) {
                 lastLine =
                         lineNumber - 1;                   // If we are the last thread, ensure we get all of the lines.
             }
 
             // Correct quota if necessary.
-            unsigned long localQuota = lastLine - firstLine;
+            localQuota = lastLine - firstLine;
             if (quota < 0) {
                 quota = 0;
             }
@@ -165,21 +167,21 @@ int main(int argc, char *argv[]) {
 
         printf("Thread-%d: getting personal info\n", threadId);
         // Determine next thread's first and last lines.
-        unsigned long firstLine = 0;           // First line we need to compare - inclusive.
-        unsigned long lastLine = quota;      // Last line we need to compare - inclusive.
+        firstLine = 0;           // First line we need to compare - inclusive.
+        lastLine = quota;      // Last line we need to compare - inclusive.
         if ((numOfThreads) == 1) {
             lastLine = lineNumber - 1;      // If we are the last thread, ensure we get all of the lines.
         }
         // Correct quota if necessary.
-        unsigned long localQuota = lastLine - firstLine;
+        localQuota = lastLine - firstLine;
         if (quota < 0) {
             quota = 0;
         }
     } else {
         printf("Thread-%d: receiving data\n", threadId);
         /// RECEIVE DISPATCHED DATA
-        unsigned long firstLine = quota * threadId;
-        unsigned long lastLine = quota * (threadId) + 1;
+        firstLine = quota * threadId;
+        lastLine = quota * (threadId) + 1;
         if((threadId) == (numOfThreads) - 1) {
             lastLine = lineNumber - 1;
         }
