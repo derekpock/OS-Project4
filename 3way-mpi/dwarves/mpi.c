@@ -242,7 +242,7 @@ int main(int argc, char *argv[]) {
 
             int ready = 1;
             MPI_Send(&ready, 1, MPI_INT, i, 9999999999 + i, MPI_COMM_WORLD);
-            printf("Thread-%d: starting collection from %d\n", threadId, i);
+            printf("Thread-%d: starting collection from %d with size %d\n", threadId, i, localQuota);
             for(unsigned long j = 0; j < localQuota; j++) {
                 // Put line (j + firstLine) from thread i into results
                 unsigned long lineLength = 0;
@@ -264,7 +264,7 @@ int main(int argc, char *argv[]) {
         printf("Thread-%d: waiting to send data\n", threadId);
         int ready = 0;
         MPI_Recv(&ready, 1, MPI_INT, 0, 9999999999 + threadId, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        printf("Thread-%d: sending data to be collected size\n", threadId);
+        printf("Thread-%d: sending data to be collected size %d\n", threadId, localQuota);
         for(unsigned long j = 0; j < localQuota; j++) {
             line_sizes[j] = strlen(results[j]) + 1;
             MPI_Send(&line_sizes[j], 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
@@ -318,6 +318,12 @@ int main(int argc, char *argv[]) {
 //    }
 
 
+    int clearMem = 0;
+    if(threadId == 0) {
+        clearMem = 1;
+    }
+    printf("Thread-%d: awaiting clear memory\n", threadId);
+    MPI_Bcast(&clearMem, 1, MPI_INT, 0, MPI_COMM_WORLD);
     printf("Thread-%d: freeing memory\n", threadId);
 
     if(threadId == 0) {
