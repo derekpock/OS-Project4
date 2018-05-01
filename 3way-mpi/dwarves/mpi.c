@@ -297,12 +297,12 @@ int main(int argc, char *argv[]) {
 
 void getQuota(unsigned long numOfLines, int numOfThreads, int threadID, unsigned long *firstLine, unsigned long *quota) {
     // Determine global quota.
-    unsigned long gQuota = numOfLines / numOfThreads;
-    if(gQuota * numOfThreads < numOfLines) {
+    unsigned long gQuota = numOfLines / numOfThreads;   //10 = 30 / 3
+    if(gQuota * numOfThreads < numOfLines) {    // 10 * 3 < 30
         gQuota++;
     }
-    (*firstLine) = gQuota * threadID;
-    unsigned long lastLine = gQuota * (threadID) + 1;
+    (*firstLine) = gQuota * threadID;   // 10 = 10 * 1, 20 = 20 * 1
+    unsigned long lastLine = gQuota * (threadID + 1);
     if((threadID) == (numOfThreads) - 1) {
         lastLine = numOfLines - 1;
     }
