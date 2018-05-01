@@ -246,8 +246,9 @@ int main(int argc, char *argv[]) {
                 MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 results[j + firstLine] = malloc(sizeof(char) * lineLength);
                 for(unsigned long k = 0; k < lineLength; k++) {
-                    printf("asking for %d\n", k);
+                    printf("asking for %d\n", j*10000 + k);
                     MPI_Recv(&(results[j + firstLine][k]), 1, MPI_UNSIGNED_CHAR, i, j*10000 + k, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                    printf("got %d\n", j*10000 + k);
                 }
             }
         }
@@ -265,7 +266,9 @@ int main(int argc, char *argv[]) {
             line_sizes[j] = strlen(results[j]) + 1;
             MPI_Send(&line_sizes[j], 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
             for(unsigned long k = 0; k < line_sizes[j]; k++) {
+                printf("sending%d\n", j*10000 + k);
                 MPI_Send(&(results[j][k]), 1, MPI_UNSIGNED_CHAR, 0, j*10000 + k, MPI_COMM_WORLD);
+                printf("sent%d\n", j*10000 + k);
             }
         }
     }
