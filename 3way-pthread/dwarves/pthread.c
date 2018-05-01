@@ -131,7 +131,7 @@ int main(int argc, char *argv[]) {
         memcpy(threadArgs[i], arg, offset);
         memcpy(threadArgs[i], &i, sizeof(int));
         //memcpy(arg, &i, sizeof(int));
-        printf("Creating thread %d\n", *((int*)threadArgs[i]));
+//        printf("Creating thread %d\n", *((int*)threadArgs[i]));
         rc = pthread_create(&threads[i], &attr, threadRun, threadArgs[i]);
         if (rc) {
             printf("Error! Return code from pthread_create() is %d\n", rc);
@@ -139,20 +139,20 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    printf("Main thread before.\n");
+//    printf("Main thread before.\n");
     pthread_attr_destroy(&attr);
-    printf("Main thread after.\n");
+//    printf("Main thread after.\n");
     void *status;
     for(int rc, i = 0; i < numberOfThreads; i++) {
         rc = pthread_join(threads[i], &status);
         free(threadArgs[i]);
-        printf("Main thread joined.\n");
+//        printf("Main thread joined.\n");
         if (rc) {
             printf("Error! Return code from pthread_join() is %d\n", rc);
             return -1;
         }
     }
-    printf("Main thread finished.\n");
+//    printf("Main thread finished.\n");
 
     if(verbosity != 0) {
         // End thread section. Print the results.
@@ -193,7 +193,7 @@ void* threadRun(void *arg) {
     offset += sizeof(char**);
     memcpy(&results, arg + offset, sizeof(char**));
 
-    printf("Thread %d starting.\n", threadNumber);
+//    printf("Thread %d starting.\n", threadNumber);
 
     // Determine our quota.
     unsigned long quota = numberOfLines / numberOfThreads;
@@ -233,7 +233,7 @@ void* threadRun(void *arg) {
         results[i + firstLine] = localResults[i];
     }
     free(localResults);
-    printf("Thread %d finished.\n", threadNumber);
+//    printf("Thread %d finished.\n", threadNumber);
     pthread_exit(NULL);
 }
 
