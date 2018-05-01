@@ -8,6 +8,7 @@
 
 char* findLongestSubstring(char* a, char* b);
 void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results);
+void getQuota(unsigned long numOfLines, int numOfThreads, int threadID, unsigned long *firstLine, unsigned long *quota);
 
 // Simple linked list structure holding i and j index components.
 struct ListItem {
@@ -25,9 +26,6 @@ int main(int argc, char *argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &numOfThreads);
 
     unsigned long numberOfLinesToProcess = 1000;
-    unsigned long localQuota;
-    unsigned long firstLine;
-    unsigned long lastLine;
     char verbosity = 1;
     unsigned long lineNumber = 0;
     char** fileData = NULL;
@@ -125,76 +123,36 @@ int main(int argc, char *argv[]) {
     printf("Thread-%d: broadcast lines\n", threadId);
     // Broadcast number of lines
     MPI_Bcast(&lineNumber, 1, MPI_UNSIGNED_LONG, 0, MPI_COMM_WORLD);
-
-    // Determine global quota.
-    unsigned long quota = lineNumber / numOfThreads;
-    if(quota * numOfThreads < lineNumber) {
-        quota++;
-    }
-
-    printf("Thread-%d: global quota %lu\n", threadId, quota);
+    unsigned long myQuota;
+    unsigned long myFirstLine;
+    getQuota(lineNumber, numOfThreads, threadId, &myFirstLine, &myQuota);
+    printf("Thread-%d: my quota %lu starting at %lu\n", threadId, myQuota, myFirstLine);
     // Thread 0 start dispatching work.
     if(threadId == 0) {
         printf("Thread-%d: dispatching data\n", threadId);
         /// DISPATCH DATA TO THREADS
         for (int i = 1; i < numOfThreads; i++) {
-            // Determine next thread's first and last lines.
-            firstLine = quota * i;           // First line we need to compare - inclusive.
-            lastLine = quota * (i + 1);      // Last line we need to compare - inclusive.
-            if (i == (numOfThreads - 1)) {
-                lastLine =
-                        lineNumber - 1;                   // If we are the last thread, ensure we get all of the lines.
-            }
+            unsigned long otherQuota;
+            unsigned long otherFirstLine;
+            getQuota(lineNumber, numOfThreads, i, &otherFirstLine, &otherQuota);
 
-            // Correct quota if necessary.
-            localQuota = lastLine - firstLine;
-            if (localQuota < 0) {
-                localQuota = 0;
-            }
-
-
-            printf("Thread-%d: sending data to %d\n", threadId, i);
+            printf("Thread-%d: sending %lu data to %d\n", threadId, otherQuota, i);
             // Using j <= localQuota because thread x compares line n to n+1, and thread (x+1) compares line n+1 to n+2...
-            for (unsigned long j = 0; j <= localQuota; j++) {
+            for (unsigned long j = 0; j <= otherQuota; j++) {
                 // Send line (j + firstLine) to thread i
-                MPI_Send(&line_sizes[j + firstLine], 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD);
-                for (unsigned long k = 0; k < line_sizes[j + firstLine]; k++) {
-                    MPI_Send(&(fileData[j + firstLine][k]), 1, MPI_UNSIGNED_CHAR, i, j * 10000 + k, MPI_COMM_WORLD);
+                MPI_Send(&line_sizes[j + otherFirstLine], 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD);
+                for (unsigned long k = 0; k < line_sizes[j + otherFirstLine]; k++) {
+                    MPI_Send(&(fileData[j + otherFirstLine][k]), 1, MPI_UNSIGNED_CHAR, i, j * 10000 + k, MPI_COMM_WORLD);
                 }
             }
-        }
-
-
-        printf("Thread-%d: getting personal info\n", threadId);
-        // Determine next thread's first and last lines.
-        firstLine = 0;           // First line we need to compare - inclusive.
-        lastLine = quota;      // Last line we need to compare - inclusive.
-        if ((numOfThreads) == 1) {
-            lastLine = lineNumber - 1;      // If we are the last thread, ensure we get all of the lines.
-        }
-        // Correct quota if necessary.
-        localQuota = lastLine - firstLine;
-        if (quota < 0) {
-            quota = 0;
         }
     } else {
         printf("Thread-%d: receiving data\n", threadId);
         /// RECEIVE DISPATCHED DATA
-        firstLine = quota * threadId;
-        lastLine = quota * (threadId) + 1;
-        if((threadId) == (numOfThreads) - 1) {
-            lastLine = lineNumber - 1;
-        }
 
-        // Correct quota if necessary.
-        localQuota = lastLine - firstLine;
-        if(localQuota < 0) {
-            localQuota = 0;
-        }
-
-        fileData = malloc(sizeof(char*) * (localQuota + 1));
-        results = malloc(sizeof(char*) * localQuota);
-        for(unsigned long j = 0; j <= localQuota; j++) {
+        fileData = malloc(sizeof(char*) * (myQuota + 1));
+        results = malloc(sizeof(char*) * myQuota);
+        for(unsigned long j = 0; j <= myQuota; j++) {
             unsigned long lineLength = 0;
             MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD,  MPI_STATUS_IGNORE);
             fileData[j] = malloc(sizeof(char) * lineLength);
@@ -212,8 +170,8 @@ int main(int argc, char *argv[]) {
     MPI_Bcast(&start, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     /// RUN OPERATION
-    printf("Thread-%d: running on %lu lines\n", threadId, localQuota);
-    threadRun(threadId, numOfThreads, localQuota, fileData, results);
+    printf("Thread-%d: running on %lu lines\n", threadId, myQuota);
+    threadRun(threadId, numOfThreads, myQuota, fileData, results);
     printf("Thread-%d: finished\n", threadId);
 
     int finish = 0;
@@ -227,29 +185,20 @@ int main(int argc, char *argv[]) {
         /// COLLECT DATA FROM THREADS
         for(int i = 1; i < numOfThreads; i++) {
             printf("Thread-%d: collectino from %d\n", threadId, i);
-            // Determine next thread's first and last lines.
-            unsigned long firstLine = quota * i;           // First line we need to compare - inclusive.
-            unsigned long lastLine = quota * (i + 1);      // Last line we need to compare - inclusive.
-            if(i == (numOfThreads - 1)) {
-                lastLine = lineNumber - 1;                   // If we are the last thread, ensure we get all of the lines.
-            }
-
-            // Correct quota if necessary.
-            unsigned long localQuota = lastLine - firstLine;
-            if(localQuota < 0) {
-                localQuota = 0;
-            }
+            unsigned long otherQuota;
+            unsigned long otherFirstLine;
+            getQuota(lineNumber, numOfThreads, i, &otherFirstLine, &otherQuota);
 
             int ready = 1;
             MPI_Send(&ready, 1, MPI_INT, i, 9999999999 + i, MPI_COMM_WORLD);
-            printf("Thread-%d: starting collection from %d with size %d\n", threadId, i, localQuota);
-            for(unsigned long j = 0; j < localQuota; j++) {
+            printf("Thread-%d: starting collection from %d with size %lu starting on %lu\n", threadId, i, otherQuota, otherFirstLine);
+            for(unsigned long j = 0; j < otherQuota; j++) {
                 // Put line (j + firstLine) from thread i into results
                 unsigned long lineLength = 0;
                 MPI_Recv(&lineLength, 1, MPI_UNSIGNED_LONG, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-                results[j + firstLine] = malloc(sizeof(char) * lineLength);
+                results[j + otherFirstLine] = malloc(sizeof(char) * lineLength);
                 for(unsigned long k = 0; k < lineLength; k++) {
-                    MPI_Recv(&(results[j + firstLine][k]), 1, MPI_UNSIGNED_CHAR, i, j*10000 + k, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                    MPI_Recv(&(results[j + otherFirstLine][k]), 1, MPI_UNSIGNED_CHAR, i, j*10000 + k, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 }
             }
         }
@@ -260,12 +209,12 @@ int main(int argc, char *argv[]) {
         }
     } else {
         /// SEND DATA TO BE COLLECTED
-        line_sizes = malloc(sizeof(unsigned long) * localQuota);
+        line_sizes = malloc(sizeof(unsigned long) * myQuota);
         printf("Thread-%d: waiting to send data\n", threadId);
         int ready = 0;
         MPI_Recv(&ready, 1, MPI_INT, 0, 9999999999 + threadId, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        printf("Thread-%d: sending data to be collected size %d\n", threadId, localQuota);
-        for(unsigned long j = 0; j < localQuota; j++) {
+        printf("Thread-%d: sending data to be collected size %d\n", threadId, myQuota);
+        for(unsigned long j = 0; j < myQuota; j++) {
             line_sizes[j] = strlen(results[j]) + 1;
             MPI_Send(&line_sizes[j], 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
             for(unsigned long k = 0; k < line_sizes[j]; k++) {
@@ -333,17 +282,36 @@ int main(int argc, char *argv[]) {
         }
         free(fileData[lineNumber]);
     } else {
-        for(unsigned long i = 0; i < localQuota; i++) {
+        for(unsigned long i = 0; i < myQuota; i++) {
             free(results[i]);
             free(fileData[i]);
         }
-        free(fileData[localQuota]);
+        free(fileData[myQuota]);
     }
     // Free all memory.
     free(results);
     free(fileData);
     free(line_sizes);
     MPI_Finalize();
+}
+
+void getQuota(unsigned long numOfLines, int numOfThreads, int threadID, unsigned long *firstLine, unsigned long *quota) {
+    // Determine global quota.
+    unsigned long gQuota = numOfLines / numOfThreads;
+    if(gQuota * numOfThreads < numOfLines) {
+        gQuota++;
+    }
+    (*firstLine) = gQuota * threadID;
+    unsigned long lastLine = gQuota * (threadID) + 1;
+    if((threadID) == (numOfThreads) - 1) {
+        lastLine = numOfLines - 1;
+    }
+
+    // Correct quota if necessary.
+    (*quota) = lastLine - (*firstLine);
+    if((*quota) < 0) {
+        (*quota) = 0;
+    }
 }
 
 void threadRun(int threadNumber, int numberOfThreads, unsigned long numberOfLines, char** fileData, char** results) {
