@@ -148,8 +148,8 @@ int main(int argc, char *argv[]) {
 
             // Correct quota if necessary.
             localQuota = lastLine - firstLine;
-            if (quota < 0) {
-                quota = 0;
+            if (localQuota < 0) {
+                localQuota = 0;
             }
 
 
@@ -188,8 +188,8 @@ int main(int argc, char *argv[]) {
 
         // Correct quota if necessary.
         localQuota = lastLine - firstLine;
-        if(quota < 0) {
-            quota = 0;
+        if(localQuota < 0) {
+            localQuota = 0;
         }
 
         fileData = malloc(sizeof(char*) * (localQuota + 1));
@@ -235,9 +235,9 @@ int main(int argc, char *argv[]) {
             }
 
             // Correct quota if necessary.
-            localQuota = lastLine - firstLine;
-            if(quota < 0) {
-                quota = 0;
+            unsigned long localQuota = lastLine - firstLine;
+            if(localQuota < 0) {
+                localQuota = 0;
             }
 
             for(unsigned long j = 0; j < localQuota; j++) {
@@ -261,7 +261,7 @@ int main(int argc, char *argv[]) {
         /// SEND DATA TO BE COLLECTED
         line_sizes = malloc(sizeof(unsigned long) * localQuota);
 
-        printf("Thread-%d: sending data to be collected\n", threadId);
+        printf("Thread-%d: sending data to be collected size\n", threadId);
         for(unsigned long j = 0; j < localQuota; j++) {
             line_sizes[j] = strlen(results[j]) + 1;
             MPI_Send(&line_sizes[j], 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
