@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     char** results;
     unsigned long *line_sizes;
 
-    printf("Thread-%d: initialized\n", threadId);
+//    printf("Thread-%d: initialized\n", threadId);
 
     if(threadId == 0) {
         for(int i = 1; i < argc; i++) {
@@ -117,26 +117,26 @@ int main(int argc, char *argv[]) {
             return -1;
         }
 
-        printf("Thread-%d: file loaded\n", threadId);
+//        printf("Thread-%d: file loaded\n", threadId);
     }
 
-    printf("Thread-%d: broadcast lines\n", threadId);
+//    printf("Thread-%d: broadcast lines\n", threadId);
     // Broadcast number of lines
     MPI_Bcast(&lineNumber, 1, MPI_UNSIGNED_LONG, 0, MPI_COMM_WORLD);
     unsigned long myQuota;
     unsigned long myFirstLine;
     getQuota(lineNumber, numOfThreads, threadId, &myFirstLine, &myQuota);
-    printf("Thread-%d: my quota %lu starting at %lu\n", threadId, myQuota, myFirstLine);
+//    printf("Thread-%d: my quota %lu starting at %lu\n", threadId, myQuota, myFirstLine);
     // Thread 0 start dispatching work.
     if(threadId == 0) {
-        printf("Thread-%d: dispatching data\n", threadId);
+//        printf("Thread-%d: dispatching data\n", threadId);
         /// DISPATCH DATA TO THREADS
         for (int i = 1; i < numOfThreads; i++) {
             unsigned long otherQuota;
             unsigned long otherFirstLine;
             getQuota(lineNumber, numOfThreads, i, &otherFirstLine, &otherQuota);
 
-            printf("Thread-%d: sending %lu data to %d\n", threadId, otherQuota, i);
+//            printf("Thread-%d: sending %lu data to %d\n", threadId, otherQuota, i);
             // Using j <= localQuota because thread x compares line n to n+1, and thread (x+1) compares line n+1 to n+2...
             for (unsigned long j = 0; j <= otherQuota; j++) {
                 // Send line (j + firstLine) to thread i
@@ -147,7 +147,7 @@ int main(int argc, char *argv[]) {
             }
         }
     } else {
-        printf("Thread-%d: receiving data\n", threadId);
+//        printf("Thread-%d: receiving data\n", threadId);
         /// RECEIVE DISPATCHED DATA
 
         fileData = malloc(sizeof(char*) * (myQuota + 1));
@@ -166,32 +166,32 @@ int main(int argc, char *argv[]) {
     if(threadId == 0) {
         start = 1;
     }
-    printf("Thread-%d: awaiting start broadcast\n", threadId);
+//    printf("Thread-%d: awaiting start broadcast\n", threadId);
     MPI_Bcast(&start, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     /// RUN OPERATION
-    printf("Thread-%d: running on %lu lines\n", threadId, myQuota);
+//    printf("Thread-%d: running on %lu lines\n", threadId, myQuota);
     threadRun(threadId, numOfThreads, myQuota, fileData, results);
-    printf("Thread-%d: finished\n", threadId);
+//    printf("Thread-%d: finished\n", threadId);
 
     int finish = 0;
     if(threadId == 0) {
         finish = 1;
     }
-    printf("Thread-%d: awaiting finish broadcast\n", threadId);
+//    printf("Thread-%d: awaiting finish broadcast\n", threadId);
     MPI_Bcast(&finish, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     if(threadId == 0) {
         /// COLLECT DATA FROM THREADS
         for(int i = 1; i < numOfThreads; i++) {
-            printf("Thread-%d: collectino from %d\n", threadId, i);
+//            printf("Thread-%d: collectino from %d\n", threadId, i);
             unsigned long otherQuota;
             unsigned long otherFirstLine;
             getQuota(lineNumber, numOfThreads, i, &otherFirstLine, &otherQuota);
 
             int ready = 1;
             MPI_Send(&ready, 1, MPI_INT, i, 9999999999 + i, MPI_COMM_WORLD);
-            printf("Thread-%d: starting collection from %d with size %lu starting on %lu\n", threadId, i, otherQuota, otherFirstLine);
+//            printf("Thread-%d: starting collection from %d with size %lu starting on %lu\n", threadId, i, otherQuota, otherFirstLine);
             for(unsigned long j = 0; j < otherQuota; j++) {
                 // Put line (j + firstLine) from thread i into results
                 unsigned long lineLength = 0;
@@ -210,10 +210,10 @@ int main(int argc, char *argv[]) {
     } else {
         /// SEND DATA TO BE COLLECTED
         line_sizes = malloc(sizeof(unsigned long) * myQuota);
-        printf("Thread-%d: waiting to send data\n", threadId);
+//        printf("Thread-%d: waiting to send data\n", threadId);
         int ready = 0;
         MPI_Recv(&ready, 1, MPI_INT, 0, 9999999999 + threadId, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        printf("Thread-%d: sending data to be collected size %d\n", threadId, myQuota);
+//        printf("Thread-%d: sending data to be collected size %d\n", threadId, myQuota);
         for(unsigned long j = 0; j < myQuota; j++) {
             line_sizes[j] = strlen(results[j]) + 1;
             MPI_Send(&line_sizes[j], 1, MPI_UNSIGNED_LONG, 0, 0, MPI_COMM_WORLD);
@@ -271,9 +271,9 @@ int main(int argc, char *argv[]) {
     if(threadId == 0) {
         clearMem = 1;
     }
-    printf("Thread-%d: awaiting clear memory\n", threadId);
+//    printf("Thread-%d: awaiting clear memory\n", threadId);
     MPI_Bcast(&clearMem, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    printf("Thread-%d: freeing memory\n", threadId);
+//    printf("Thread-%d: freeing memory\n", threadId);
 
     if(threadId == 0) {
         for(unsigned long i = 0; i < (lineNumber - 1); i++) {
