@@ -132,7 +132,7 @@ int main(int argc, char *argv[]) {
         quota++;
     }
 
-    printf("Thread-%d: global quota\n", threadId);
+    printf("Thread-%d: global quota %lu\n", threadId, quota);
     // Thread 0 start dispatching work.
     if(threadId == 0) {
         printf("Thread-%d: dispatching data\n", threadId);
@@ -212,7 +212,7 @@ int main(int argc, char *argv[]) {
     MPI_Bcast(&start, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     /// RUN OPERATION
-    printf("Thread-%d: running\n", threadId);
+    printf("Thread-%d: running on %lu lines\n", threadId, localQuota);
     threadRun(threadId, numOfThreads, localQuota, fileData, results);
     printf("Thread-%d: finished\n", threadId);
 
